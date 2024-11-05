@@ -1,0 +1,15 @@
+services:
+  resume-builder-db:
+    image: postgres:latest
+    container_name: resume-builder-container
+    environment:
+      - POSTGRES_USER=resumeBuilderUser
+      - POSTGRES_PASSWORD=resume
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/data/postgres
+
+volumes:
+  postgres:
