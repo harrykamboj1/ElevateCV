@@ -25,14 +25,17 @@ export const register = async (req: Request, res: Response) => {
         data: { email, password: hashedPassword },
       });
 
-      res.status(201).json({ message: "User registered successfully", user });
+      res.status(201).json({ message: "User registered successfully" });
     } else {
       console.log("Fail to Receive Request");
       return res.status(400).json({ message: "Fail to receive request" });
     }
   } catch (error) {
     console.log("Error in auth register :: " + error);
-    res.status(500).json({ message: INTERNAL_SERVER_ERROR });
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ errors: error.errors });
+    }
+    return res.status(500).json({ message: INTERNAL_SERVER_ERROR });
   }
 };
 
