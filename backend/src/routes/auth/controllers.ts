@@ -10,25 +10,36 @@ export const register = async (req: Request, res: Response) => {
   try {
     const parsedData = registrationSchema.parse(req.body);
     if (parsedData != null) {
-      const { email, password } = parsedData;
+      const { email, password, name } = parsedData;
 
       const existingUser = await prisma.user.findUnique({
         where: { email },
       });
-
       if (existingUser) {
-        return res.status(400).json({ message: "User Already Exists" });
+        return res
+          .status(200)
+          .json({ message: "User Already Exists", errorCode: "-1" });
       }
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await prisma.user.create({
-        data: { email, password: hashedPassword },
+        data: { email, password: hashedPassword, name },
       });
 
-      res.status(201).json({ message: "User registered successfully" });
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+        expiresIn: process.env.SESSION_EXPIRE || "1h",
+      });
+
+      res.status(200).json({
+        message: "User registered successfully",
+        token,
+        errorCode: "1",
+      });
     } else {
       console.log("Fail to Receive Request");
-      return res.status(400).json({ message: "Fail to receive request" });
+      return res
+        .status(200)
+        .json({ message: "Fail to receive request", errorCode: "-1" });
     }
   } catch (error) {
     console.log("Error in auth register :: " + error);
