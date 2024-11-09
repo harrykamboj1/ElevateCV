@@ -14,10 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
-import { FailFlag } from "@/lib/constants";
+import { apiUrl, FailFlag } from "@/lib/constants";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
-const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 const SignUpPage = () => {
   const form = useForm<z.infer<typeof signUpSchema>>({
