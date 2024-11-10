@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -35,6 +36,7 @@ const SignInPage = () => {
       } else {
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
       }
     } catch (e) {
       console.log(e);

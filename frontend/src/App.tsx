@@ -2,9 +2,10 @@ import { Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import useAuth from "./hooks/useAuth";
 import { ScaleLoader } from "react-spinners";
+import Header from "./components/custom/Header";
 
 function App() {
-  const { isLoading, isSignedIn, user } = useAuth();
+  const { isLoading, isSignedIn } = useAuth();
 
   if (isLoading) {
     return (
@@ -25,6 +26,7 @@ function App() {
   }
   return (
     <>
+      <Header />
       <Outlet />
     </>
   );

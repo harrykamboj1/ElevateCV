@@ -16,9 +16,10 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { apiUrl, FailFlag } from "@/lib/constants";
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -37,6 +38,7 @@ const SignUpPage = () => {
       } else {
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
       }
     } catch (e) {
       console.log(e);

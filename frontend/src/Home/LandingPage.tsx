@@ -1,5 +1,11 @@
+import Header from "@/components/custom/Header";
 import React from "react";
 
 export const LandingPage = () => {
-  return <div>LandingPage</div>;
+  return (
+    <div>
+      <Header />
+      LandingPage
+    </div>
+  );
 };
