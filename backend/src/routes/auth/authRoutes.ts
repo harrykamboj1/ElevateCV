@@ -7,6 +7,6 @@ router.post("/login", loginUser as any);
 
 router.post("/register", register as any);
 
-router.post("/session", checkSession as any);
+router.get("/session", checkSession as any);
 
 export default router;
