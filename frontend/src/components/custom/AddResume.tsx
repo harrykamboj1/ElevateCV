@@ -1,4 +1,4 @@
-import { PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -22,9 +22,11 @@ interface AddResumeProps {
 const AddResume: React.FC<AddResumeProps> = ({ email }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async () => {
+    setLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
@@ -36,7 +38,7 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
           },
         }
       );
-      console.log(response.data.errorCode);
+      setLoading(false);
       if (response.data.errorCode == FailFlag) {
         toast.error(response.data.message);
       } else {
@@ -44,6 +46,7 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
         navigate("/dashboard");
       }
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
   };
@@ -88,7 +91,7 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
               disabled={!title}
               className="bg-blue-900 hover:bg-customDarkBlue"
             >
-              Create
+              {loading ? <Loader2 className="animate-spin" /> : "Create"}
             </Button>
           </DialogFooter>
         </DialogContent>

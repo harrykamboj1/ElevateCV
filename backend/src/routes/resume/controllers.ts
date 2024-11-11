@@ -7,9 +7,7 @@ export const createResume = async (req: Request, res: Response) => {
   try {
     const token = req.headers.authorization?.split(EMPTY_SPACE)[1];
     if (!token) return res.status(401).json({ error: "Unauthorized" });
-    console.log(req.body);
     const parseData = createResumeSchema.parse(req.body);
-    console.log(parseData);
     const { email, title } = parseData;
 
     const user = await prisma.user.findUnique({ where: { email } });
