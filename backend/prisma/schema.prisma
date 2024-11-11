@@ -13,4 +13,15 @@ model User {
   name      String?
   password  String
   createdAt DateTime @default(now())
+  resumes   Resume[]
+}
+
+model Resume {
+  resumeId   String   @id @default(uuid())
+  email      String
+  title      String   @unique
+  userId     Int
+  createdAt  DateTime @default(now())
+  modifiedAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
 }
