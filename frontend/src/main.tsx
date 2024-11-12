@@ -6,6 +6,8 @@ import SignUpPage from "./auth/sign-up/SignUpPage";
 import App from "./App";
 import { LandingPage } from "./Home/LandingPage";
 import Dashboard from "./dashboard/dashboard";
+import { EditResume } from "./dashboard/resume/[resumeId]";
+import ErrorBoundary from "./dashboard/ErrorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,11 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/resume/edit/:resumeId",
+        element: <EditResume />,
+        errorElement: <ErrorBoundary />,
       },
     ],
   },

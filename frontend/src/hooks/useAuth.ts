@@ -43,7 +43,7 @@ const useAuth = () => {
   useEffect(() => {
     checkSession();
   }, []);
-  console.log(authState);
+
   return { ...authState, isLoading };
 };
 
