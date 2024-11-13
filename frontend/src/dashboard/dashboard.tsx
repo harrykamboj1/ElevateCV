@@ -12,6 +12,7 @@ type ResumeListType = {
   title: string;
   userId: number;
   resumeId: string;
+  modifiedAt: Date;
 }[];
 
 const Dashboard = () => {
