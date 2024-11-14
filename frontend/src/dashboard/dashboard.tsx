@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [resumeList, setResumeList] = useState<ResumeListType>([]);
 
   useEffect(() => {
+    if (!user) return;
     const getAllResumeByUser = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -70,7 +71,10 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6  gap-8 mt-10">
         <AddResume email={user!.email} />
         {resumeList!.map((resume, index) => (
-          <ResumeCard resume={resume} key={index} />
+          <>
+            {console.log(index)}
+            <ResumeCard resume={resume} key={index} cardKey={index} />
+          </>
         ))}
       </div>
     </div>

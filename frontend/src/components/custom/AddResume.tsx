@@ -43,7 +43,7 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
         toast.error(response.data.message);
       } else {
         toast.success(response.data.message);
-        navigate("/dashboard");
+        navigate(`/dashboard/resume/edit/${response.data.resume.resumeId}`);
       }
     } catch (e) {
       setLoading(false);
