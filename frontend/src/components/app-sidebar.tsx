@@ -2,7 +2,7 @@ import {
   Book,
   BriefcaseBusiness,
   Grip,
-  ReceiptText,
+  MonitorCheck,
   UserPen,
 } from "lucide-react";
 
@@ -27,11 +27,11 @@ const items = [
     index: 1,
     icon: UserPen,
   },
-  {
-    title: "Summary",
-    index: 2,
-    icon: ReceiptText,
-  },
+  // {
+  //   title: "Summary",
+  //   index: 2,
+  //   icon: ReceiptText,
+  // },
   {
     title: "Experience",
     index: 3,
@@ -46,6 +46,11 @@ const items = [
     title: "Skills",
     index: 5,
     icon: Grip,
+  },
+  {
+    title: "Projects",
+    index: 6,
+    icon: MonitorCheck,
   },
 ];
 
