@@ -6,8 +6,9 @@ import SignUpPage from "./auth/sign-up/SignUpPage";
 import App from "./App";
 import { LandingPage } from "./Home/LandingPage";
 import Dashboard from "./dashboard/dashboard";
-import { EditResume } from "./dashboard/resume/[resumeId]";
+import { EditResume } from "./dashboard/resume/[resumeId]/EditResume";
 import ErrorBoundary from "./dashboard/ErrorBoundary";
+import RootLayout from "./RootLayout";
 
 const router = createBrowserRouter([
   {
@@ -16,11 +17,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
-      },
-      {
-        path: "/dashboard/resume/edit/:resumeId",
-        element: <EditResume />,
-        errorElement: <ErrorBoundary />,
       },
     ],
   },
@@ -35,6 +31,16 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-up",
     element: <SignUpPage />,
+  },
+  {
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/dashboard/resume/edit/:resumeId",
+        element: <EditResume />,
+        errorElement: <ErrorBoundary />,
+      },
+    ],
   },
 ]);
 
