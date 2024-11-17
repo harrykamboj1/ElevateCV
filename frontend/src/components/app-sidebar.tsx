@@ -17,6 +17,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import useFormStore from "@/store/store";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 // Menu items.
 const items = [
@@ -49,15 +51,22 @@ const items = [
 
 export function AppSidebar() {
   const updateState = useFormStore((state) => state.updateState);
+  const [active, setActive] = useState(1);
   const changeFormType = (index: number) => {
     updateState(index);
+    setActive(index);
   };
   return (
-    <Sidebar variant="floating">
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-2xl my-4 flex  justify-start p-3 cursor-pointer">
-            Resume Details
+          <SidebarGroupLabel className="mt-4">
+            <div className="flex items-center gap-x-2 hover:cursor-pointer p-4 ">
+              <img src="/logo.svg" width={30} height={30} alt="logo" />
+              <h1 className="font-openSans font-semibold text-xl">
+                Resume Buddy
+              </h1>
+            </div>
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="mt-10   ">
@@ -65,7 +74,13 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className="text-lg flex p-3 mt-4 cursor-pointer"
+                    className={cn(
+                      `text-lg flex p-3 mt-4 cursor-pointer hover:scale-105 transition-all hover:font-semibold ${
+                        active == item.index
+                          ? "bg-white text-customDarkBlue"
+                          : ""
+                      }`
+                    )}
                   >
                     <div onClick={() => changeFormType(item.index)}>
                       <item.icon />
