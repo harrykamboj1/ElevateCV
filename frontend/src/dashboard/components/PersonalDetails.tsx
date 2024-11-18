@@ -17,7 +17,7 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
       <h1 className="text-center text-2xl font-medium font-openSans">
         {resumeInfo?.basicInfo?.name}
       </h1>
-      <div className="text-xs font-normal text-center">
+      <div className="text-xs font-normal text-center font-openSans">
         <a href={`tel:${resumeInfo.basicInfo.contact.phone}`}>
           {resumeInfo.basicInfo.contact.phone}
         </a>
@@ -44,15 +44,20 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
         >
           Github
         </a>
-        {" | "}
-        <a
-          href={formatLink(resumeInfo.basicInfo.contact.portfolio)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline"
-        >
-          Portfolio
-        </a>
+
+        {resumeInfo?.basicInfo?.contact?.portfolio && (
+          <>
+            {" | "}
+            <a
+              href={formatLink(resumeInfo?.basicInfo?.contact?.portfolio)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline"
+            >
+              Portfolio
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,10 @@
 import React from "react";
 import { ResumeData } from "../data/ResumeDummyData";
 import PersonalDetails from "./PersonalDetails";
+import Experience from "./Experience";
+import Education from "./Education";
+import Projects from "./Projects";
+import Skills from "./Skills";
 
 interface ResumePreviewProps {
   resumeInfo: ResumeData;
@@ -8,8 +12,12 @@ interface ResumePreviewProps {
 
 const ResumePreviewSection: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   return (
-    <div className="shadow-lg  h-full p-8 ">
+    <div className="shadow-lg  h-full px-8 py-2">
       <PersonalDetails resumeInfo={resumeInfo} />
+      <Education resumeInfo={resumeInfo} />
+      <Experience resumeInfo={resumeInfo} />
+      <Projects resumeInfo={resumeInfo} />
+      <Skills resumeInfo={resumeInfo} />
     </div>
   );
 };

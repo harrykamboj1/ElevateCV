@@ -13,18 +13,11 @@ export const dummyData = {
     summary:
       "Passionate and detail-oriented Full Stack Developer with 5+ years of experience designing and implementing scalable web applications. Skilled in JavaScript, React, Node.js, and database management.",
   },
-  skills: [
-    "JavaScript",
-    "React",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "SQL",
-    "Docker",
-    "Kubernetes",
-    "AWS",
-    "TypeScript",
-  ],
+  skills: {
+    languages: ["JavaScript", "Java", "C++", "TypeScript"],
+    frameworks: ["React", "Node.js", "Express"],
+    developerTools: ["Git, Github, Google Cloud Platform"],
+  },
   experience: [
     {
       company: "Tech Innovators Inc.",
@@ -56,19 +49,31 @@ export const dummyData = {
       graduationYear: "2018",
       location: "Berkeley, CA",
     },
+    {
+      institution: "University of California, Berkeley",
+      degree: "Bachelor of Science in Computer Science",
+      graduationYear: "2018",
+      location: "Berkeley, CA",
+    },
   ],
   projects: [
     {
       title: "E-Commerce Platform",
-      description:
+      description: [
         "Developed a full-stack e-commerce platform using React, Node.js, and MongoDB. Implemented features like user authentication, product listings, and a shopping cart, serving over 10,000 users.",
+      ],
       techStack: ["React", "Node.js", "MongoDB", "Express"],
+      startDate: "Jan 2024",
+      endDate: "Feb 2024",
     },
     {
       title: "Real-Time Chat Application",
-      description:
+      description: [
         "Built a real-time chat application using WebSockets and Node.js. Integrated user presence and typing indicators for an enhanced user experience.",
+      ],
       techStack: ["WebSockets", "Node.js", "Socket.IO", "React"],
+      startDate: "Jan 2024",
+      endDate: "Feb 2024",
     },
   ],
   certifications: [
@@ -121,7 +126,11 @@ export interface ResumeData {
     };
     summary: string;
   };
-  skills: string[];
+  skills: {
+    languages: [];
+    frameworks: [];
+    developerTools: [];
+  };
   experience: {
     company: string;
     location: string;
@@ -137,8 +146,10 @@ export interface ResumeData {
   }[];
   projects: {
     title: string;
-    description: string;
+    description: string[];
     techStack: string[];
+    startDate: string;
+    endDate: string;
   }[];
   certifications: {
     title: string;
