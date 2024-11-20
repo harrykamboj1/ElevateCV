@@ -10,7 +10,7 @@ type Action = {
 
 const useFormStore = create<formStoreType & Action>((set) => ({
   formIndex: 1,
-  updateState: () => set((state) => ({ formIndex: state.formIndex })),
+  updateState: (index) => set({ formIndex: index }),
 }));
 
 export default useFormStore;

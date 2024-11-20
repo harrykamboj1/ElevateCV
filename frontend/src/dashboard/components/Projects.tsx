@@ -7,7 +7,7 @@ interface ResumePreviewProps {
 
 const Projects: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   return (
-    <div className="mt-6">
+    <div className="mt-2">
       <h1 className="text-sm font-semibold font-openSans cursor-pointer mb-1">
         PROJECTS
       </h1>
@@ -18,15 +18,17 @@ const Projects: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
           className="px-3 text-xs font-normal font-openSans cursor-pointer py-2"
         >
           <div className="flex justify-between font-openSans">
-            <div className="flex">
+            <div className="">
               <h1 className="font-bold">{data?.title}</h1>
-              {" | "}
-              {data.techStack.map((skill, index) => (
-                <p key={index}>
-                  {index == 0 ? " " : ", "}
-                  {skill}
-                </p>
-              ))}
+
+              <div className="flex">
+                {data.techStack.map((skill, index) => (
+                  <p key={index}>
+                    {index == 0 ? " " : ", "}
+                    {skill}
+                  </p>
+                ))}
+              </div>
             </div>
             <div className="flex">
               <span className="text-gray-700">
