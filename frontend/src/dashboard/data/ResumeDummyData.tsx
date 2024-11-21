@@ -1,6 +1,7 @@
 export const dummyData = {
   basicInfo: {
-    name: "John Doe",
+    firstName: "John",
+    lastName: "Doe",
     title: "Full Stack Developer",
     contact: {
       email: "john.doe@example.com",
@@ -114,17 +115,15 @@ export const dummyData = {
 
 export interface ResumeData {
   basicInfo: {
-    name: string;
-    title: string;
+    firstName: string;
+    lastName: string;
     contact: {
       email: string;
       phone: string;
       linkedin: string;
       github: string;
-      location: string;
       portfolio: string;
     };
-    summary: string;
   };
   skills: {
     languages: [];

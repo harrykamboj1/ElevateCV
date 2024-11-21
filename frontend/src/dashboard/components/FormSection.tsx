@@ -34,12 +34,12 @@ const FormSection = () => {
   };
 
   return (
-    <div className="relative mt-10 flex flex-col justify-center items-center h-screen">
+    <div className="relative mt-10 flex flex-col justify-center items-center h-screen ">
       {cards.map((card, index) => {
         return (
           <motion.div
             key={card.id}
-            className="absolute bg-white h-[28rem] w-[36rem] md:h-[36rem] md:w-[36rem] rounded-3xl p-6 shadow-xl border border-neutral-200 shadow-black/[0.4] flex flex-col justify-between"
+            className="absolute bg-white h-[28rem] w-[36rem] md:h-[36rem] border-t-customDarkBlue border-t-4 md:w-[36rem] rounded-3xl p-6 shadow-xl border border-neutral-200 shadow-black/[0.4] flex flex-col justify-between"
             style={{
               transformOrigin: "top center",
             }}
