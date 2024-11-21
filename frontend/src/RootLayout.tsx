@@ -3,7 +3,6 @@ import useAuth from "./hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
-import Header from "./components/custom/Header";
 
 const RootLayout = () => {
   const { isLoading, isSignedIn } = useAuth();
@@ -30,7 +29,7 @@ const RootLayout = () => {
     <div className="flex h-screen">
       <SidebarProvider>
         <AppSidebar />
-        <SidebarTrigger />
+        {/* <SidebarTrigger /> */}
         <main className="flex-1 ">
           <Outlet />
         </main>

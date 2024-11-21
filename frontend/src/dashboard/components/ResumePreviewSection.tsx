@@ -12,7 +12,7 @@ interface ResumePreviewProps {
 
 const ResumePreviewSection: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   return (
-    <div className="shadow-lg  h-full px-8 py-2">
+    <div className="shadow-lg  h-full px-8 py-2 bg-white shadow-black/[0.4]">
       <PersonalDetails resumeInfo={resumeInfo} />
       <Education resumeInfo={resumeInfo} />
       <Experience resumeInfo={resumeInfo} />

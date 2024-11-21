@@ -28,9 +28,8 @@ export const EditResume = () => {
     );
   }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 p-6 gap-6 bg-blue-100">
       <FormSection />
-
       <ResumePreviewSection resumeInfo={resumeInfo!} />
     </div>
   );
