@@ -16,7 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import useFormStore from "@/store/store";
+import { useFormStore } from "@/store/store";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 

@@ -72,7 +72,6 @@ const Dashboard = () => {
         <AddResume email={user!.email} />
         {resumeList!.map((resume, index) => (
           <>
-            {console.log(index)}
             <ResumeCard resume={resume} key={index} cardKey={index} />
           </>
         ))}

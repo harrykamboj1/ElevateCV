@@ -1,4 +1,4 @@
-import useFormStore from "@/store/store";
+import { useFormStore } from "@/store/store";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import PersonalForm from "../Forms/PersonalForm";
