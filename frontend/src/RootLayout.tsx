@@ -1,8 +1,6 @@
 import { ScaleLoader } from "react-spinners";
 import useAuth from "./hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
-import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-import { AppSidebar } from "./components/app-sidebar";
 
 const RootLayout = () => {
   const { isLoading, isSignedIn } = useAuth();
@@ -25,17 +23,7 @@ const RootLayout = () => {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
-  return (
-    <div className="flex h-screen">
-      <SidebarProvider>
-        <AppSidebar />
-        {/* <SidebarTrigger /> */}
-        <main className="flex-1 ">
-          <Outlet />
-        </main>
-      </SidebarProvider>
-    </div>
-  );
+  return <Outlet />;
 };
 
 export default RootLayout;

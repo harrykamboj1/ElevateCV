@@ -24,23 +24,21 @@ export const dummyData = {
       company: "Tech Innovators Inc.",
       location: "San Francisco, CA",
       position: "Senior Full Stack Developer",
-      duration: "Jan 2022 - Present",
-      responsibilities: [
-        "Developed and maintained web applications using React, Node.js, and PostgreSQL, enhancing platform performance by 30%.",
-        "Led a team of 5 developers to implement CI/CD pipelines, reducing deployment times by 40%.",
-        "Collaborated with product and design teams to create new features, resulting in a 20% increase in user engagement.",
-      ],
+      startDate: "Jan 2022",
+      endDate: "Present",
+      responsibilities: `Developed and maintained web applications using React, Node.js, and PostgreSQL, enhancing platform performance by 30%.,
+      Led a team of 5 developers to implement CI/CD pipelines, reducing deployment times by 40%.
+      Collaborated with product and design teams to create new features, resulting in a 20% increase in user engagement.`,
     },
     {
       company: "Creative Solutions Ltd.",
       location: "New York, NY",
       position: "Full Stack Developer",
-      duration: "May 2018 - Dec 2021",
-      responsibilities: [
-        "Designed REST APIs and integrated them with front-end components, achieving a seamless user experience.",
-        "Optimized SQL queries and database schemas, improving data retrieval speeds by 25%.",
-        "Implemented user authentication and authorization using JWT, improving application security.",
-      ],
+      startDate: "May 2018",
+      endDate: "Dec 2021",
+      responsibilities: `Designed REST APIs and integrated them with front-end components, achieving a seamless user experience.,
+        Optimized SQL queries and database schemas, improving data retrieval speeds by 25%,
+        Implemented user authentication and authorization using JWT, improving application security.`,
     },
   ],
   education: [
@@ -134,8 +132,9 @@ export interface ResumeData {
     company: string;
     location: string;
     position: string;
-    duration: string;
-    responsibilities: string[];
+    startDate: string;
+    endDate: string;
+    responsibilities: string;
   }[];
   education: {
     institution: string;

@@ -19,7 +19,9 @@ const Experience: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
         >
           <div className="flex justify-between ">
             <h1 className="font-bold">{data?.position}</h1>
-            <h1 className="text-gray-700">{data?.duration}</h1>
+            <h1 className="text-gray-700">
+              {data?.startDate + " - " + data?.endDate}
+            </h1>
           </div>
           <div className="flex justify-between text-gray-700">
             <h1>{data?.company}</h1>
@@ -27,11 +29,7 @@ const Experience: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
           </div>
 
           <ul className="list-disc list-inside mt-1">
-            {data.responsibilities.map((responsibility, idx) => (
-              <li key={idx} className="text-gray-700">
-                {responsibility}
-              </li>
-            ))}
+            {data?.responsibilities}
           </ul>
         </div>
       ))}

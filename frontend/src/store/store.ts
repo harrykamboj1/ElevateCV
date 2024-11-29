@@ -42,3 +42,41 @@ export const usePersonalFormStore = create<PersonalFormType>((set) => ({
       [field]: value,
     })),
 }));
+
+export type ExperienceFormStore = {
+  id: string;
+  company: string;
+  position: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  responsibilities: string;
+};
+
+export type ExperienceState = {
+  experiences: ExperienceFormStore[];
+  addExperience: (experience: ExperienceFormStore) => void;
+  updateExperience: (id: string, experience: ExperienceFormStore) => void;
+  removeExperience: (id: string) => void;
+};
+
+export const useExperienceFormStore = create<ExperienceState>((set) => ({
+  experiences: [],
+
+  addExperience: (experience) =>
+    set((state) => ({
+      experiences: [...state.experiences, experience],
+    })),
+
+  updateExperience: (id, updatedExperience) =>
+    set((state) => ({
+      experiences: state.experiences.map((exp) =>
+        exp.id === id ? { ...exp, ...updatedExperience } : exp
+      ),
+    })),
+
+  removeExperience: (id) =>
+    set((state) => ({
+      experiences: state.experiences.filter((exp) => exp.id !== id),
+    })),
+}));

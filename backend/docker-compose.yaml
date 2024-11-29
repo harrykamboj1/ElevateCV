@@ -2,6 +2,7 @@ services:
   resume-builder-db:
     image: postgres:latest
     container_name: resume-builder-container
+    restart: always
     environment:
       - POSTGRES_USER=resumeBuilderUser
       - POSTGRES_PASSWORD=resume
