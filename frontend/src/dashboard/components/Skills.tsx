@@ -6,7 +6,7 @@ interface ResumePreviewProps {
 
 const Skills: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   return (
-    <div className="mt-2">
+    <div className="mt-2 pb-20">
       <h1 className="text-sm font-semibold font-openSans cursor-pointer mb-1">
         SKILLS
       </h1>

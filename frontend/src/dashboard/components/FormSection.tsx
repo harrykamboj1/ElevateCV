@@ -60,7 +60,7 @@ const FormSection = () => {
     //     );
     //   })}
     // </div>
-    <div className="h-screen px-8  ">
+    <div className=" px-8  ">
       <div className="flex justify-end py-4 gap-x-3">
         {active > 1 && (
           <Button

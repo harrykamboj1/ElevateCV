@@ -18,17 +18,22 @@ import {
   Toolbar,
 } from "react-simple-wysiwyg";
 
-const TextEditor = () => {
+type TextEditorProps = {
+  onTextEditorChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+};
+
+const TextEditor: React.FC<TextEditorProps> = ({ onTextEditorChange }) => {
   const [value, setValue] = useState("");
 
   function onChange(e) {
     setValue(e.target.value);
+    onTextEditorChange(e);
   }
 
   return (
     <div>
       <EditorProvider>
-        <Editor value={value} onChange={onChange}>
+        <Editor value={value} onChange={(e) => onChange(e)}>
           <Toolbar>
             <BtnUndo />
             <BtnRedo />

@@ -17,7 +17,7 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   };
   return (
     <div>
-      <div className="flex justify-center gap-x-1">
+      <div className="flex justify-center gap-x-1 pt-5">
         <h1 className="text-center text-2xl font-medium font-openSans">
           {firstName ? firstName : resumeInfo?.basicInfo?.firstName}
         </h1>
