@@ -51,6 +51,7 @@ export type ExperienceFormStore = {
   startDate: string;
   endDate: string;
   responsibilities: string;
+  isPresent: string;
 };
 
 export type ExperienceState = {

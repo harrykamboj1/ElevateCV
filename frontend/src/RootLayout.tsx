@@ -1,6 +1,7 @@
 import { ScaleLoader } from "react-spinners";
 import useAuth from "./hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
+import Header from "./components/custom/Header";
 
 const RootLayout = () => {
   const { isLoading, isSignedIn } = useAuth();
@@ -23,7 +24,12 @@ const RootLayout = () => {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      {/* <Header /> */}
+      <Outlet />;
+    </>
+  );
 };
 
 export default RootLayout;

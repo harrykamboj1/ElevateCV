@@ -28,7 +28,7 @@ export const EditResume = () => {
     );
   }
   return (
-    <div className="flex p-6 bg-blue-100 gap-x-5 overflow-y-auto">
+    <div className="flex p-6 bg-blue-100 h-screen gap-x-5 overflow-y-auto">
       <div className="flex-1">
         <FormSection />
       </div>

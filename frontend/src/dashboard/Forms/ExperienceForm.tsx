@@ -2,20 +2,11 @@ import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useExperienceFormStore } from "@/store/store";
+import { ExperienceFormStore, useExperienceFormStore } from "@/store/store";
 import { nanoid } from "nanoid";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-
-type ExperienceFormStore = {
-  id: string;
-  company: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  responsibilities: string;
-  location: string;
-};
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formField: ExperienceFormStore = {
   id: "",
@@ -25,10 +16,12 @@ const formField: ExperienceFormStore = {
   endDate: "",
   responsibilities: "",
   location: "",
+  isPresent: "false",
 };
 
 const ExperienceForm = () => {
-  const { addExperience, removeExperience } = useExperienceFormStore();
+  const { addExperience, removeExperience, updateExperience } =
+    useExperienceFormStore();
 
   const [newExperience, setNewExperience] = useState<ExperienceFormStore[]>([]);
 
@@ -39,9 +32,7 @@ const ExperienceForm = () => {
   };
 
   const handleDelete = () => {
-    console.log(newExperience.length);
     if (newExperience.length === 0) return;
-    console.log(newExperience);
 
     const lastExperience = newExperience[newExperience.length - 1];
     removeExperience(lastExperience.id);
@@ -58,6 +49,7 @@ const ExperienceForm = () => {
     const { name, value } = e.target;
 
     newEntries[index][name as keyof ExperienceFormStore] = value;
+    updateExperience(newEntries[index].id, newEntries[index]);
     setNewExperience(newEntries);
   };
 
@@ -68,6 +60,19 @@ const ExperienceForm = () => {
   ) => {
     const newEntries = newExperience.slice();
     newEntries[index][name as keyof ExperienceFormStore] = e.target.value;
+    updateExperience(newEntries[index].id, newEntries[index]);
+    setNewExperience(newEntries);
+  };
+
+  const handleCheckChange = (
+    e: boolean | string,
+    name: string,
+    index: number
+  ) => {
+    const newEntries = newExperience.slice();
+    console.log(e.toString());
+    newEntries[index][name as keyof ExperienceFormStore] = e.toString();
+    updateExperience(newEntries[index].id, newEntries[index]);
     setNewExperience(newEntries);
   };
 
@@ -138,12 +143,28 @@ const ExperienceForm = () => {
                 End Date
               </Label>
               <Input
+                disabled={val.isPresent == "true"}
                 type="date"
                 name="endDate"
                 value={val.endDate}
                 onChange={(event) => handleChange(index, event)}
                 className="mt-1 border-customDarkBlue focus:border-2 focus-visible:ring-transparent"
               />
+            </div>
+            <div className="col-span-1 flex  justify-start px-10 mt-10">
+              <div className="flex gap-x-3 items-center">
+                <Checkbox
+                  name="isPresent"
+                  checked={val.isPresent == "true"}
+                  value={val.isPresent}
+                  onCheckedChange={(event) =>
+                    handleCheckChange(event, "isPresent", index)
+                  }
+                />
+                <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
+                  Present
+                </Label>
+              </div>
             </div>
           </div>
           <div className="mt-4">
