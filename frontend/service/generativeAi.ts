@@ -1,6 +1,6 @@
 import { aiModelKey } from "../src/lib/constants";
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = aiModelKey;
 const genAI = new GoogleGenerativeAI(apiKey);

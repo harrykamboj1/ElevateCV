@@ -7,6 +7,7 @@ import SkillsForm from "../Forms/SkillsForm";
 import ProjectForm from "../Forms/ProjectForm";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // type Card = {
 //   id: number;
@@ -15,6 +16,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const FormSection = () => {
   // const [cards, setCards] = useState<Card[]>(CARDS);
+  const navigate = useNavigate();
   const updateState = useFormStore((state) => state.updateState);
   const [active, setActive] = useState(1);
   const changeFormType = (index: number) => {
@@ -60,24 +62,36 @@ const FormSection = () => {
     //     );
     //   })}
     // </div>
-    <div className=" px-8  ">
-      <div className="flex justify-end py-4 gap-x-3">
-        {active > 1 && (
-          <Button
-            className="bg-gray-700 hover:bg-gray-900 p-x-2 w-36"
-            onClick={() => changeFormType(active - 1)}
-          >
-            <ArrowLeft /> Back
-          </Button>
-        )}
-        {active < 5 && (
-          <Button
-            className="bg-blue-800 hover:bg-blue-900 p-x-2 w-36"
-            onClick={() => changeFormType(active + 1)}
-          >
-            Next <ArrowRight />
-          </Button>
-        )}
+    <div className="px-8">
+      <div className="flex justify-between">
+        <div className="py-4">
+          {active == 1 && (
+            <Button
+              className="bg-gray-700 hover:bg-gray-900 p-x-2 w-36"
+              onClick={() => navigate("/dashboard")}
+            >
+              Back to Dashboard
+            </Button>
+          )}
+        </div>
+        <div className="flex justify-end py-4 gap-x-3">
+          {active > 1 && (
+            <Button
+              className="bg-gray-700 hover:bg-gray-900 p-x-2 w-36"
+              onClick={() => changeFormType(active - 1)}
+            >
+              <ArrowLeft /> Back
+            </Button>
+          )}
+          {active < 5 && (
+            <Button
+              className="bg-blue-800 hover:bg-blue-900 p-x-2 w-36"
+              onClick={() => changeFormType(active + 1)}
+            >
+              Next <ArrowRight />
+            </Button>
+          )}
+        </div>
       </div>
       <div>
         {active == 1 && <PersonalForm />}

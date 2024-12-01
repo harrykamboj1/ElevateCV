@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <>
       <Toaster />
-      <div className="p-3 px-5 justify-between flex shadow-md ">
+      <div className="p-3 px-5 justify-between flex shadow-md bg-white">
         <div className="flex items-center gap-x-2 hover:cursor-pointer">
           <img src="/logo.svg" width={35} height={35} alt="logo" />
           <h1 className="font-openSans font-semibold text-2xl">Resume Buddy</h1>

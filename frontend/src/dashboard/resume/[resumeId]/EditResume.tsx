@@ -7,6 +7,7 @@ import { ScaleLoader } from "react-spinners";
 
 export const EditResume = () => {
   const params = useParams();
+  console.log(params);
   const [resumeInfo, setResumeInfo] = useState<ResumeData>();
   useEffect(() => {
     if (!dummyData) {
@@ -16,7 +17,7 @@ export const EditResume = () => {
   }, []);
   if (!resumeInfo) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-white">
+      <div className="flex justify-center items-center  bg-gradient-to-r bg-white">
         <ScaleLoader
           color={"#072354"}
           height={60}
@@ -28,7 +29,7 @@ export const EditResume = () => {
     );
   }
   return (
-    <div className="flex p-6 bg-blue-100 h-screen gap-x-5 overflow-y-auto">
+    <div className="flex p-6    gap-x-5 ">
       <div className="flex-1">
         <FormSection />
       </div>

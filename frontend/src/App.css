@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.rsw-ce ul {
-  list-style: disc;
-  padding-left: 2em;
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
 }
-
-.rsw-ce ol {
-  list-style: decimal;
-  padding-left: 2em;
+ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+body {
+  background-color: #dbeafe;
 }
 
 @layer base {
