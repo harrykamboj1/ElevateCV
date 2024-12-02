@@ -81,3 +81,39 @@ export const useExperienceFormStore = create<ExperienceState>((set) => ({
       experiences: state.experiences.filter((exp) => exp.id !== id),
     })),
 }));
+
+export type EducationFormState = {
+  id: string;
+  institution: string;
+  degree: string;
+  graduationYear: string;
+  location: string;
+};
+
+export type EducationState = {
+  educationDetails: EducationFormState[];
+  addEducation: (educationDetails: EducationFormState) => void;
+  updateEducation: (id: string, educationDetails: EducationFormState) => void;
+  removeEducation: (id: string) => void;
+};
+
+export const useEducationState = create<EducationState>((set) => ({
+  educationDetails: [],
+
+  addEducation: (education) =>
+    set((state) => ({
+      educationDetails: [...state.educationDetails, education],
+    })),
+
+  updateEducation: (id, updateEducation) =>
+    set((state) => ({
+      educationDetails: state.educationDetails.map((exp) =>
+        exp.id === id ? { ...exp, ...updateEducation } : exp
+      ),
+    })),
+
+  removeEducation: (id) =>
+    set((state) => ({
+      educationDetails: state.educationDetails.filter((exp) => exp.id !== id),
+    })),
+}));

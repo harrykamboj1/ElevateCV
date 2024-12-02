@@ -48,10 +48,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
 }) => {
   const { experiences } = useExperienceFormStore();
   const [value, setValue] = useState(`<ul>
-      <li>Led the front-end development of a new React.js application, resulting in a 25% increase in user conversion rates.</li>
-      <li>Developed and maintained backend services using Node.js and Express.js, ensuring high availability and performance.</li>
-      <li>Implemented a new authentication system, improving security and user experience.</li>
-      <li>Collaborated with designers and backend developers to deliver a high-quality, user-friendly product.</li>
+      
     </ul>`);
   const [loading, setLoading] = useState(false);
   const [skills, setSkills] = useState("");
