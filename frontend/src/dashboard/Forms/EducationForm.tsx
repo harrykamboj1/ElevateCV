@@ -2,11 +2,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EducationFormState, useEducationState } from "@/store/store";
+import { Plus } from "lucide-react";
+import { nanoid } from "nanoid";
 import React from "react";
+
+const formField: EducationFormState = {
+  id: "",
+  institution: "",
+  degree: "",
+  graduationYear: "",
+  location: "",
+};
 
 const EducationForm = () => {
   const { educationDetails, addEducation, removeEducation, updateEducation } =
     useEducationState();
+
+  const handleAddExperience = () => {
+    const educationWithId = { ...formField, id: nanoid() };
+    addEducation(educationWithId);
+  };
+
+  const handleDelete = () => {
+    if (educationDetails.length === 0) return;
+
+    const lastEducation = educationDetails[educationDetails.length - 1];
+    removeEducation(lastEducation.id);
+  };
 
   const handleChange = (
     index: number,
@@ -30,7 +52,7 @@ const EducationForm = () => {
         <div className="border my-3 border-customDarkBlue"></div>
       </div>
       {educationDetails.map((val, index) => (
-        <div className="grid grid-cols-2 gap-x-2 mt-3">
+        <div className="grid grid-cols-2 gap-x-2 mt-5 border border-customDarkBlue p-5 shadow-lg rounded-xl">
           <div>
             <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
               Institution Name
@@ -61,7 +83,7 @@ const EducationForm = () => {
               Graduation Year
             </Label>
             <Input
-              placeholder="+1 123-456-7890"
+              placeholder="Eg. 2018"
               name="graduationYear"
               value={val.graduationYear}
               onChange={(event) => handleChange(index, event)}
@@ -70,10 +92,10 @@ const EducationForm = () => {
           </div>
           <div className="col-span-1 mt-4">
             <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
-              E-Mail
+              Location
             </Label>
             <Input
-              placeholder="john.doe@example.com"
+              placeholder="Eg. Berkeley, CA"
               name="location"
               value={val.location}
               onChange={(event) => handleChange(index, event)}
@@ -83,9 +105,18 @@ const EducationForm = () => {
         </div>
       ))}
 
-      <div className="mt-4 flex justify-end">
-        <Button className="bg-blue-800 hover:bg-blue-900 p-x-2 w-36">
-          Save Data
+      <div className="flex justify-start mt-4 gap-x-4">
+        <Button
+          onClick={handleAddExperience}
+          className="bg-blue-800 hover:bg-blue-900 rounded-2xl shadow-sm text-white "
+        >
+          <Plus /> Add Education
+        </Button>
+        <Button
+          onClick={handleDelete}
+          className="bg-red-700 w-36 hover:bg-red-800 rounded-2xl shadow-sm text-white "
+        >
+          Delete Education
         </Button>
       </div>
     </div>

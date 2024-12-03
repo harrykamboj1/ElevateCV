@@ -91,7 +91,10 @@ const ExperienceForm = () => {
         </p>
         <div className="border my-3 border-customDarkBlue"></div>
         {experiences.map((val, index) => (
-          <div key={val.id}>
+          <div
+            key={val.id}
+            className="mt-5 border border-customDarkBlue p-5 shadow-lg rounded-xl"
+          >
             <div className="flex flex-col"></div>
             <div className="grid grid-cols-2 gap-x-2 mt-3">
               <div>
