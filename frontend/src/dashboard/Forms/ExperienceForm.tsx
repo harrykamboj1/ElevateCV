@@ -176,7 +176,7 @@ const ExperienceForm = () => {
               </div>
               <div className="col-span-1 mt-10">
                 <Button
-                  onClick={() => generateSummaryFromAi(index)}
+                  onClick={() => generateSummaryFromAi()}
                   className=" rounded-lg font-openSans font-semibold  hover:bg-gray-300 bg-white border-2 border-black shadow-xl    text-black "
                 >
                   <Brain /> Ask AI

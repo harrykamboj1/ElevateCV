@@ -117,3 +117,54 @@ export const useEducationState = create<EducationState>((set) => ({
       educationDetails: state.educationDetails.filter((exp) => exp.id !== id),
     })),
 }));
+
+export type SkillsFormType = {
+  languages: string[];
+  frameworks: string[];
+  developerTools: string[];
+
+  addLanguages: (language: string) => void;
+  addFrameworks: (framework: string) => void;
+  addDeveloperTools: (developerTool: string) => void;
+
+  removeLanguages: (language: string) => void;
+  removeFrameworks: (framework: string) => void;
+  removeDeveloperTools: (developerTool: string) => void;
+};
+
+export const useSkillsFormState = create<SkillsFormType>((set) => ({
+  // State
+  languages: [],
+  frameworks: [],
+  developerTools: [],
+
+  // Add methods
+  addLanguages: (language) =>
+    set((state) => ({
+      languages: [...state.languages, language],
+    })),
+  addFrameworks: (framework) =>
+    set((state) => ({
+      frameworks: [...state.frameworks, framework],
+    })),
+  addDeveloperTools: (developerTool) =>
+    set((state) => ({
+      developerTools: [...state.developerTools, developerTool],
+    })),
+
+  // Remove methods
+  removeLanguages: (language) =>
+    set((state) => ({
+      languages: state.languages.filter((lang) => lang !== language),
+    })),
+  removeFrameworks: (framework) =>
+    set((state) => ({
+      frameworks: state.frameworks.filter((fw) => fw !== framework),
+    })),
+  removeDeveloperTools: (developerTool) =>
+    set((state) => ({
+      developerTools: state.developerTools.filter(
+        (tool) => tool !== developerTool
+      ),
+    })),
+}));

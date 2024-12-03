@@ -1,12 +1,21 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useSkillsFormState } from "@/store/store";
 import { X } from "lucide-react";
 import React, { useState } from "react";
 
 const SkillsForm = () => {
-  const [languages, setLanguages] = useState<string[]>([]);
-  const [frameworks, setFrameworks] = useState<string[]>([]);
-  const [developerTools, setDeveloperTools] = useState<string[]>([]);
+  const {
+    languages,
+    frameworks,
+    developerTools,
+    addLanguages,
+    addDeveloperTools,
+    addFrameworks,
+    removeDeveloperTools,
+    removeLanguages,
+    removeFrameworks,
+  } = useSkillsFormState();
   const [inputValue, setInputValue] = useState("");
   const [frameworkInputValue, setFrameworkInputValue] = useState("");
   const [developerToolsInputValue, setDeveloperToolsValue] = useState("");
@@ -18,24 +27,21 @@ const SkillsForm = () => {
     if (name === "languages") {
       if (e.key === "Enter" && inputValue.trim() !== "") {
         if (!languages.includes(inputValue.trim())) {
-          setLanguages([...languages, inputValue.trim()]);
+          addLanguages(inputValue.trim());
         }
         setInputValue("");
       }
     } else if (name === "frameworks") {
       if (e.key === "Enter" && frameworkInputValue.trim() !== "") {
         if (!frameworks.includes(frameworkInputValue.trim())) {
-          setFrameworks([...frameworks, frameworkInputValue.trim()]);
+          addFrameworks(frameworkInputValue.trim());
         }
         setFrameworkInputValue("");
       }
     } else if (name === "developerTools") {
       if (e.key === "Enter" && developerToolsInputValue.trim() !== "") {
         if (!developerTools.includes(developerToolsInputValue.trim())) {
-          setDeveloperTools([
-            ...developerTools,
-            developerToolsInputValue.trim(),
-          ]);
+          addDeveloperTools(developerToolsInputValue.trim());
         }
         setDeveloperToolsValue("");
       }
@@ -43,19 +49,13 @@ const SkillsForm = () => {
   };
 
   const handleDeleteSkill = (skillToDelete: string): void => {
-    setLanguages(languages.filter((languages) => languages !== skillToDelete));
+    removeLanguages(skillToDelete);
   };
   const handleFrameworks = (skillToDelete: string): void => {
-    setFrameworks(
-      frameworks.filter((frameworks) => frameworks !== skillToDelete)
-    );
+    removeFrameworks(skillToDelete);
   };
   const handleDeveloperTools = (skillToDelete: string): void => {
-    setDeveloperTools(
-      developerTools.filter(
-        (developerTools) => developerTools !== skillToDelete
-      )
-    );
+    removeDeveloperTools(skillToDelete);
   };
 
   return (
