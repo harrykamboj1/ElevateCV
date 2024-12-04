@@ -168,3 +168,42 @@ export const useSkillsFormState = create<SkillsFormType>((set) => ({
       ),
     })),
 }));
+
+// Personal Projects
+
+export type ProjectsFormState = {
+  id: string;
+  title: string;
+  description: string;
+  techStack: string;
+  startDate: string;
+  endDate: string;
+};
+
+export type ProjectsState = {
+  projects: ProjectsFormState[];
+  addProjects: (project: ProjectsFormState) => void;
+  updateProjects: (id: string, project: ProjectsFormState) => void;
+  removeProjects: (id: string) => void;
+};
+
+export const useProjectsFormState = create<ProjectsState>((set) => ({
+  projects: [],
+
+  addProjects: (project) =>
+    set((state) => ({
+      projects: [...state.projects, project],
+    })),
+
+  updateProjects: (id, updateProject) =>
+    set((state) => ({
+      projects: state.projects.map((exp) =>
+        exp.id === id ? { ...exp, ...updateProject } : exp
+      ),
+    })),
+
+  removeProjects: (id) =>
+    set((state) => ({
+      projects: state.projects.filter((exp) => exp.id !== id),
+    })),
+}));

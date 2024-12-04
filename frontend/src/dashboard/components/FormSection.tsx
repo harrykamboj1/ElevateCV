@@ -7,7 +7,7 @@ import SkillsForm from "../Forms/SkillsForm";
 import ProjectForm from "../Forms/ProjectForm";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // type Card = {
 //   id: number;
@@ -65,14 +65,14 @@ const FormSection = () => {
     <div className="px-8">
       <div className="flex justify-between">
         <div className="py-4">
-          {active == 1 && (
+          {
             <Button
               className="bg-gray-700 hover:bg-gray-900 p-x-2 w-36"
               onClick={() => navigate("/dashboard")}
             >
               Back to Dashboard
             </Button>
-          )}
+          }
         </div>
         <div className="flex justify-end py-4 gap-x-3">
           {active > 1 && (

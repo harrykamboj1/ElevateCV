@@ -61,7 +61,7 @@ export const dummyData = {
       description: [
         "Developed a full-stack e-commerce platform using React, Node.js, and MongoDB. Implemented features like user authentication, product listings, and a shopping cart, serving over 10,000 users.",
       ],
-      techStack: ["React", "Node.js", "MongoDB", "Express"],
+      techStack: `React, Node.js, MongoDB, Express`,
       startDate: "Jan 2024",
       endDate: "Feb 2024",
     },
@@ -70,7 +70,7 @@ export const dummyData = {
       description: [
         "Built a real-time chat application using WebSockets and Node.js. Integrated user presence and typing indicators for an enhanced user experience.",
       ],
-      techStack: ["WebSockets", "Node.js", "Socket.IO", "React"],
+      techStack: `WebSockets, Node.js, MongoDB, Next.js`,
       startDate: "Jan 2024",
       endDate: "Feb 2024",
     },
@@ -144,8 +144,8 @@ export interface ResumeData {
   }[];
   projects: {
     title: string;
-    description: string[];
-    techStack: string[];
+    description: string;
+    techStack: string;
     startDate: string;
     endDate: string;
   }[];
