@@ -207,3 +207,16 @@ export const useProjectsFormState = create<ProjectsState>((set) => ({
       projects: state.projects.filter((exp) => exp.id !== id),
     })),
 }));
+
+export type SectionState = {
+  sectionsOrder: string[];
+  updateSectionOrder: (newOrder: string[]) => void;
+};
+
+export const useSectionStore = create<SectionState>((set) => ({
+  sectionsOrder: ["Education", "Experience", "Projects", "Skills"],
+  updateSectionOrder: (newOrder: string[]) =>
+    set(() => ({
+      sectionsOrder: newOrder,
+    })),
+}));

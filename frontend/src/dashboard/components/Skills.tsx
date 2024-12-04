@@ -8,7 +8,7 @@ interface ResumePreviewProps {
 const Skills: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   const { languages, frameworks, developerTools } = useSkillsFormState();
   return (
-    <div className="mt-2 pb-14">
+    <div className="mt-2">
       <h1 className="text-sm font-semibold font-openSans cursor-pointer mb-1">
         SKILLS
       </h1>

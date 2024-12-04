@@ -8,6 +8,7 @@ import ProjectForm from "../Forms/ProjectForm";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import SectionOrder from "./SectionOrder";
 
 // type Card = {
 //   id: number;
@@ -83,7 +84,7 @@ const FormSection = () => {
               <ArrowLeft /> Back
             </Button>
           )}
-          {active < 5 && (
+          {active < 6 && (
             <Button
               className="bg-blue-800 hover:bg-blue-900 p-x-2 w-36"
               onClick={() => changeFormType(active + 1)}
@@ -99,6 +100,7 @@ const FormSection = () => {
         {active == 3 && <EducationForm />}
         {active == 4 && <SkillsForm />}
         {active == 5 && <ProjectForm />}
+        {active == 6 && <SectionOrder />}
       </div>
     </div>
   );
