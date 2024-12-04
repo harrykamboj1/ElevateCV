@@ -3,8 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EducationFormState, useEducationState } from "@/store/store";
 import { Plus } from "lucide-react";
-import { nanoid } from "nanoid";
-import React from "react";
+import React, { useState } from "react";
 
 const formField: EducationFormState = {
   id: "",
@@ -17,10 +16,14 @@ const formField: EducationFormState = {
 const EducationForm = () => {
   const { educationDetails, addEducation, removeEducation, updateEducation } =
     useEducationState();
+  const [index, setIndex] = useState(0);
 
   const handleAddExperience = () => {
-    const educationWithId = { ...formField, id: nanoid() };
+    const currentIndex = index + 1;
+
+    const educationWithId = { ...formField, id: currentIndex.toString() };
     addEducation(educationWithId);
+    setIndex(currentIndex);
   };
 
   const handleDelete = () => {

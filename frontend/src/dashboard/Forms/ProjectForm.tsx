@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ProjectsFormState, useProjectsFormState } from "@/store/store";
-import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Button } from "@/components/ui/button";
@@ -21,9 +20,13 @@ const ProjectForm = () => {
   const { projects, addProjects, removeProjects, updateProjects } =
     useProjectsFormState();
 
+  const [index, setIndex] = useState(0);
   const handleAddProjects = () => {
-    const projectWithId = { ...formField, id: nanoid() };
+    const currentIndex = index + 1;
+
+    const projectWithId = { ...formField, id: currentIndex.toString() };
     addProjects(projectWithId);
+    setIndex(currentIndex);
   };
 
   const handleDelete = () => {

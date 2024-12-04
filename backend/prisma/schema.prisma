@@ -17,11 +17,87 @@ model User {
 }
 
 model Resume {
-  resumeId   String   @id @default(uuid())
-  email      String
-  title      String   @unique
-  userId     Int
+  resumeId        String           @id @default(uuid())
+  email           String
+  title           String           @unique
+  userId          Int
+  createdAt       DateTime         @default(now())
+  modifiedAt      DateTime         @default(now())
+  user            User             @relation(fields: [userId], references: [id])
+  personalDetails PersonalDetails?
+  experience      Experience[]
+  education       Education[]
+  skills          Skills?
+  projects        Projects[]
+  sectionsOrder   SectionOrder?
+}
+
+model PersonalDetails {
+  resumeId    String @id @default(uuid())
+  firstName   String
+  lastName    String
+  phoneNumber String
+  email       String
+  github      String
+  portfolio   String
+  linkedIn    String
+
   createdAt  DateTime @default(now())
   modifiedAt DateTime @default(now())
-  user       User     @relation(fields: [userId], references: [id])
+  resume     Resume   @relation(fields: [resumeId], references: [resumeId])
+}
+
+model Experience {
+  resumeResumeId   String   @id @default(uuid())
+  positionTitle    String
+  seqNum           String
+  companyName      String
+  location         String
+  startDate        String
+  endDate          String
+  isPresent        Boolean
+  responsibilities String
+  createdAt        DateTime @default(now())
+  modifiedAt       DateTime @default(now())
+  Resume           Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+}
+
+model Education {
+  resumeResumeId  String   @id @default(uuid())
+  institutionName String
+  seqNum          String
+  Degree          String
+  GraduationYear  String
+  Location        String
+  createdAt       DateTime @default(now())
+  modifiedAt      DateTime @default(now())
+  Resume          Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+}
+
+model Skills {
+  resumeResumeId String   @id @default(uuid())
+  languages      String[]
+  frameworks     String[]
+  developerTools String[]
+  createdAt      DateTime @default(now())
+  modifiedAt     DateTime @default(now())
+  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+}
+
+model Projects {
+  resumeResumeId String   @id @default(uuid())
+  projectTitle   String
+  techStack      String
+  startDate      String
+  endDate        String
+  description    String
+  createdAt      DateTime @default(now())
+  modifiedAt     DateTime @default(now())
+  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+}
+
+model SectionOrder {
+  resumeResumeId String   @id @default(uuid())
+  order          String[]
+  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
 }

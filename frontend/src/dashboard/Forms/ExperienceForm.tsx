@@ -3,7 +3,6 @@ import TextEditor from "../components/TextEditor";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ExperienceFormStore, useExperienceFormStore } from "@/store/store";
-import { nanoid } from "nanoid";
 import { Button } from "@/components/ui/button";
 import { Brain, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,15 +20,15 @@ const formField: ExperienceFormStore = {
 
 const ExperienceForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [index, setIndex] = useState(0);
   const { experiences, addExperience, removeExperience, updateExperience } =
     useExperienceFormStore();
 
-  // const [newExperience, setNewExperience] = useState<ExperienceFormStore[]>([]);
-
   const handleAddExperience = () => {
-    const experienceWithId = { ...formField, id: nanoid() };
+    const currentIndex = index + 1;
+    const experienceWithId = { ...formField, id: currentIndex.toString() };
     addExperience(experienceWithId);
-    // setNewExperience([...newExperience, experienceWithId]);
+    setIndex(currentIndex);
   };
 
   const handleDelete = () => {
@@ -37,9 +36,6 @@ const ExperienceForm = () => {
 
     const lastExperience = experiences[experiences.length - 1];
     removeExperience(lastExperience.id);
-    // setNewExperience((experiences) =>
-    //   experiences.filter((prev) => prev.id !== lastExperience.id)
-    // );
   };
 
   const handleChange = (
@@ -51,7 +47,6 @@ const ExperienceForm = () => {
 
     newEntries[index][name as keyof ExperienceFormStore] = value;
     updateExperience(newEntries[index].id, newEntries[index]);
-    // setNewExperience(newEntries);
   };
 
   const handleTextEditor = (
@@ -62,7 +57,6 @@ const ExperienceForm = () => {
     const newEntries = experiences.slice();
     newEntries[index][name as keyof ExperienceFormStore] = e.target.value;
     updateExperience(newEntries[index].id, newEntries[index]);
-    // setNewExperience(newEntries);
   };
 
   const handleCheckChange = (
@@ -73,7 +67,6 @@ const ExperienceForm = () => {
     const newEntries = experiences.slice();
     newEntries[index][name as keyof ExperienceFormStore] = e.toString();
     updateExperience(newEntries[index].id, newEntries[index]);
-    // setNewExperience(newEntries);
   };
 
   const generateSummaryFromAi = () => {
