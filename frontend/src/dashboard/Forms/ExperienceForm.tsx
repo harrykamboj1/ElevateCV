@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { ExperienceFormStore, useExperienceFormStore } from "@/store/store";
+import {
+  ExperienceFormStore,
+  useExperienceFormStore,
+  useResumeState,
+} from "@/store/store";
 import { Button } from "@/components/ui/button";
 import { Brain, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -20,6 +24,9 @@ const formField: ExperienceFormStore = {
 
 const ExperienceForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const resumeAddExp = useResumeState((state) => state.addExperience);
+  const resumeRemoveExp = useResumeState((state) => state.deleteExperience);
+  const updateResumeExp = useResumeState((state) => state.updateExperience);
   const [index, setIndex] = useState(0);
   const { experiences, addExperience, removeExperience, updateExperience } =
     useExperienceFormStore();
@@ -28,6 +35,7 @@ const ExperienceForm = () => {
     const currentIndex = index + 1;
     const experienceWithId = { ...formField, id: currentIndex.toString() };
     addExperience(experienceWithId);
+    resumeAddExp(experienceWithId);
     setIndex(currentIndex);
   };
 
@@ -36,6 +44,7 @@ const ExperienceForm = () => {
 
     const lastExperience = experiences[experiences.length - 1];
     removeExperience(lastExperience.id);
+    resumeRemoveExp(lastExperience.id);
   };
 
   const handleChange = (
@@ -47,6 +56,7 @@ const ExperienceForm = () => {
 
     newEntries[index][name as keyof ExperienceFormStore] = value;
     updateExperience(newEntries[index].id, newEntries[index]);
+    updateResumeExp(newEntries[index].id, newEntries[index]);
   };
 
   const handleTextEditor = (

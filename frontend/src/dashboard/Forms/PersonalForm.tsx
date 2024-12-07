@@ -1,7 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PersonalFormType, usePersonalFormStore } from "@/store/store";
+import {
+  PersonalFormType,
+  usePersonalFormStore,
+  useResumeState,
+} from "@/store/store";
 
 const PersonalForm = () => {
   const {
@@ -15,11 +18,15 @@ const PersonalForm = () => {
     updateField,
   } = usePersonalFormStore();
 
+  const personal = useResumeState((state) => state.personal);
+  const setPersonal = useResumeState((state) => state.setPersonal);
+
   const handleInputChange = (
     field: keyof Omit<PersonalFormType, "updateField">,
     value: string
   ) => {
     updateField(field, value);
+    setPersonal({ ...personal, [field]: value });
   };
 
   return (
@@ -120,11 +127,11 @@ const PersonalForm = () => {
           />
         </div>
       </div>
-      <div className="mt-4 flex justify-end">
+      {/* <div className="mt-4 flex justify-end">
         <Button className="bg-blue-800 hover:bg-blue-900 p-x-2 w-36">
           Save Data
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,5 +1,11 @@
-import { useSectionStore } from "@/store/store";
+import { Button } from "@/components/ui/button";
+import {
+  ResumeFormData,
+  usePersonalFormStore,
+  useSectionStore,
+} from "@/store/store";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import toast, { Toaster } from "react-hot-toast";
 
 const SectionOrder = () => {
   const { sectionsOrder, updateSectionOrder } = useSectionStore();
@@ -14,8 +20,17 @@ const SectionOrder = () => {
     updateSectionOrder(items);
   };
 
+  const saveData = () => {
+    try {
+    } catch (e) {
+      console.log("Error in save Data ::" + e);
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
     <div>
+      <Toaster />
       <div className="px-5 py-10 h-full   border-t-customDarkBlue border-t-4  rounded-3xl p-6 shadow-xl border  bg-white  shadow-black/[0.4] ">
         <h1 className="text-2xl text-customDarkBlue font-openSans font-semibold">
           Section Order
@@ -55,6 +70,15 @@ const SectionOrder = () => {
             )}
           </Droppable>
         </DragDropContext>
+
+        <div className="mt-10 flex justify-end">
+          <Button
+            className="bg-blue-800 hover:bg-blue-900 p-x-2 w-44"
+            onClick={() => saveData()}
+          >
+            Save All The Details
+          </Button>
+        </div>
       </div>
     </div>
   );

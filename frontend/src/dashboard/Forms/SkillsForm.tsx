@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useSkillsFormState } from "@/store/store";
+import { useResumeState, useSkillsFormState } from "@/store/store";
 import { X } from "lucide-react";
 import React, { useState } from "react";
 
@@ -19,6 +19,7 @@ const SkillsForm = () => {
   const [inputValue, setInputValue] = useState("");
   const [frameworkInputValue, setFrameworkInputValue] = useState("");
   const [developerToolsInputValue, setDeveloperToolsValue] = useState("");
+  const setSkillsForResume = useResumeState((state) => state.setSkills);
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -46,6 +47,8 @@ const SkillsForm = () => {
         setDeveloperToolsValue("");
       }
     }
+
+    setSkillsForResume({ languages, frameworks, developerTools });
   };
 
   const handleDeleteSkill = (skillToDelete: string): void => {

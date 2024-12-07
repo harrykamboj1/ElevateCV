@@ -220,3 +220,100 @@ export const useSectionStore = create<SectionState>((set) => ({
       sectionsOrder: newOrder,
     })),
 }));
+
+type Skills = {
+  languages: string[];
+  frameworks: string[];
+  developerTools: string[];
+};
+
+// Resume Type
+type ResumeState = {
+  personal: Omit<PersonalFormType, "updateField">;
+  education: EducationFormState[];
+  experience: ExperienceFormStore[];
+  skills: Skills;
+  projects: ProjectsFormState[];
+
+  setPersonal: (personal: Omit<PersonalFormType, "updateField">) => void;
+
+  addEducation: (education: EducationFormState) => void;
+  updateEducation: (id: string, updatedEducation: EducationFormState) => void;
+  deleteEducation: (id: string) => void;
+
+  addExperience: (experience: ExperienceFormStore) => void;
+  updateExperience: (
+    id: string,
+    updatedExperience: ExperienceFormStore
+  ) => void;
+  deleteExperience: (id: string) => void;
+
+  setSkills: (skills: Skills) => void;
+
+  addProject: (project: ProjectsFormState) => void;
+  updateProject: (id: string, updatedProject: ProjectsFormState) => void;
+  deleteProject: (id: string) => void;
+};
+
+export const useResumeState = create<ResumeState>((set) => ({
+  personal: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    linkedin: "",
+    github: "",
+    portfolio: "",
+  },
+  education: [],
+  experience: [],
+  skills: {
+    languages: [],
+    frameworks: [],
+    developerTools: [],
+  },
+
+  projects: [],
+
+  setPersonal: (personal) => set(() => ({ personal })),
+  addEducation: (education) =>
+    set((state) => ({ education: [...state.education, education] })),
+  updateEducation: (id, updatedEducation) =>
+    set((state) => ({
+      education: state.education.map((edu) =>
+        edu.id === id ? { ...edu, ...updatedEducation } : edu
+      ),
+    })),
+  deleteEducation: (id) =>
+    set((state) => ({
+      education: state.education.filter((edu) => edu.id !== id),
+    })),
+
+  addExperience: (experience) =>
+    set((state) => ({ experience: [...state.experience, experience] })),
+  updateExperience: (id, updatedExperience) =>
+    set((state) => ({
+      experience: state.experience.map((exp) =>
+        exp.id === id ? { ...exp, ...updatedExperience } : exp
+      ),
+    })),
+  deleteExperience: (id) =>
+    set((state) => ({
+      experience: state.experience.filter((exp) => exp.id !== id),
+    })),
+
+  setSkills: (skills) => set(() => ({ skills })),
+
+  addProject: (project) =>
+    set((state) => ({ projects: [...state.projects, project] })),
+  updateProject: (id, updatedProject) =>
+    set((state) => ({
+      projects: state.projects.map((proj) =>
+        proj.id === id ? { ...proj, ...updatedProject } : proj
+      ),
+    })),
+  deleteProject: (id) =>
+    set((state) => ({
+      projects: state.projects.filter((proj) => proj.id !== id),
+    })),
+}));

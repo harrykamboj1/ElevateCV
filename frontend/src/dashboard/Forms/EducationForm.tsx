@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { EducationFormState, useEducationState } from "@/store/store";
+import {
+  EducationFormState,
+  useEducationState,
+  useResumeState,
+} from "@/store/store";
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
 
@@ -17,12 +21,20 @@ const EducationForm = () => {
   const { educationDetails, addEducation, removeEducation, updateEducation } =
     useEducationState();
   const [index, setIndex] = useState(0);
+  const resumeAddEducation = useResumeState((state) => state.addEducation);
+  const resumeRemoveEducation = useResumeState(
+    (state) => state.deleteEducation
+  );
+  const updateResumeEducation = useResumeState(
+    (state) => state.updateEducation
+  );
 
   const handleAddExperience = () => {
     const currentIndex = index + 1;
 
     const educationWithId = { ...formField, id: currentIndex.toString() };
     addEducation(educationWithId);
+    resumeAddEducation(educationWithId);
     setIndex(currentIndex);
   };
 
@@ -31,6 +43,7 @@ const EducationForm = () => {
 
     const lastEducation = educationDetails[educationDetails.length - 1];
     removeEducation(lastEducation.id);
+    resumeRemoveEducation(lastEducation.id);
   };
 
   const handleChange = (
@@ -42,6 +55,7 @@ const EducationForm = () => {
 
     newEntries[index][name as keyof EducationFormState] = value;
     updateEducation(newEntries[index].id, newEntries[index]);
+    updateResumeEducation(newEntries[index].id, newEntries[index]);
   };
   return (
     <div className="px-5 py-10 h-full   border-t-customDarkBlue border-t-4  rounded-3xl p-6 shadow-xl border  bg-white  shadow-black/[0.4]">
