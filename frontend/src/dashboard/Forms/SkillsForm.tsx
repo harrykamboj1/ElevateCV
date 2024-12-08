@@ -29,6 +29,11 @@ const SkillsForm = () => {
       if (e.key === "Enter" && inputValue.trim() !== "") {
         if (!languages.includes(inputValue.trim())) {
           addLanguages(inputValue.trim());
+          setSkillsForResume({
+            languages: [...languages, inputValue.trim()],
+            frameworks,
+            developerTools,
+          });
         }
         setInputValue("");
       }
@@ -36,6 +41,11 @@ const SkillsForm = () => {
       if (e.key === "Enter" && frameworkInputValue.trim() !== "") {
         if (!frameworks.includes(frameworkInputValue.trim())) {
           addFrameworks(frameworkInputValue.trim());
+          setSkillsForResume({
+            languages,
+            frameworks: [...frameworks, frameworkInputValue.trim()],
+            developerTools,
+          });
         }
         setFrameworkInputValue("");
       }
@@ -43,22 +53,35 @@ const SkillsForm = () => {
       if (e.key === "Enter" && developerToolsInputValue.trim() !== "") {
         if (!developerTools.includes(developerToolsInputValue.trim())) {
           addDeveloperTools(developerToolsInputValue.trim());
+          setSkillsForResume({
+            languages,
+            frameworks,
+            developerTools: [
+              ...developerTools,
+              developerToolsInputValue.trim(),
+            ],
+          });
         }
         setDeveloperToolsValue("");
       }
     }
-
-    setSkillsForResume({ languages, frameworks, developerTools });
   };
 
   const handleDeleteSkill = (skillToDelete: string): void => {
     removeLanguages(skillToDelete);
+    const result = languages.filter((item) => item !== skillToDelete);
+    setSkillsForResume({ languages: result, frameworks, developerTools });
   };
   const handleFrameworks = (skillToDelete: string): void => {
     removeFrameworks(skillToDelete);
+    const result = frameworks.filter((item) => item !== skillToDelete);
+
+    setSkillsForResume({ languages, frameworks: result, developerTools });
   };
   const handleDeveloperTools = (skillToDelete: string): void => {
     removeDeveloperTools(skillToDelete);
+    const result = developerTools.filter((item) => item !== skillToDelete);
+    setSkillsForResume({ languages, frameworks, developerTools: result });
   };
 
   return (

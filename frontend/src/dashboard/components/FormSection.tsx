@@ -10,12 +10,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SectionOrder from "./SectionOrder";
 
-// type Card = {
-//   id: number;
-//   content: React.ReactNode;
-// };
+type FormType = {
+  resumeId: string | undefined;
+};
 
-const FormSection = () => {
+const FormSection: React.FC<FormType> = ({ resumeId }) => {
   // const [cards, setCards] = useState<Card[]>(CARDS);
   const navigate = useNavigate();
   const updateState = useFormStore((state) => state.updateState);
@@ -100,7 +99,7 @@ const FormSection = () => {
         {active == 3 && <EducationForm />}
         {active == 4 && <SkillsForm />}
         {active == 5 && <ProjectForm />}
-        {active == 6 && <SectionOrder />}
+        {active == 6 && <SectionOrder resumeId={resumeId} />}
       </div>
     </div>
   );

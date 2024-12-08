@@ -7,7 +7,6 @@ import { ScaleLoader } from "react-spinners";
 
 export const EditResume = () => {
   const params = useParams();
-  console.log(params);
   const [resumeInfo, setResumeInfo] = useState<ResumeData>();
   useEffect(() => {
     if (!dummyData) {
@@ -31,7 +30,7 @@ export const EditResume = () => {
   return (
     <div className="flex p-6    gap-x-5 ">
       <div className="flex-1">
-        <FormSection />
+        <FormSection resumeId={params.resumeId} />
       </div>
       <div className="flex-1">
         <ResumePreviewSection resumeInfo={resumeInfo!} />

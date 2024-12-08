@@ -1,6 +1,10 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ProjectsFormState, useProjectsFormState } from "@/store/store";
+import {
+  ProjectsFormState,
+  useProjectsFormState,
+  useResumeState,
+} from "@/store/store";
 import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Button } from "@/components/ui/button";
@@ -20,12 +24,17 @@ const ProjectForm = () => {
   const { projects, addProjects, removeProjects, updateProjects } =
     useProjectsFormState();
 
+  const resumeAddProject = useResumeState((state) => state.addProject);
+  const resumeRemoveProject = useResumeState((state) => state.deleteProject);
+  const updateResumeProject = useResumeState((state) => state.updateProject);
+
   const [index, setIndex] = useState(0);
   const handleAddProjects = () => {
     const currentIndex = index + 1;
 
     const projectWithId = { ...formField, id: currentIndex.toString() };
     addProjects(projectWithId);
+    resumeAddProject(projectWithId);
     setIndex(currentIndex);
   };
 
@@ -33,6 +42,7 @@ const ProjectForm = () => {
     if (projects.length === 0) return;
     const lastProject = projects[projects.length - 1];
     removeProjects(lastProject.id);
+    resumeRemoveProject(lastProject.id);
   };
 
   const handleChange = (
@@ -44,6 +54,7 @@ const ProjectForm = () => {
 
     newEntries[index][name as keyof ProjectsFormState] = value;
     updateProjects(newEntries[index].id, newEntries[index]);
+    updateResumeProject(newEntries[index].id, newEntries[index]);
   };
 
   const handleTextEditor = (

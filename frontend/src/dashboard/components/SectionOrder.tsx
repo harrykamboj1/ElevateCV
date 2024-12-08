@@ -1,15 +1,27 @@
 import { Button } from "@/components/ui/button";
-import {
-  ResumeFormData,
-  usePersonalFormStore,
-  useSectionStore,
-} from "@/store/store";
+import { useResumeState, useSectionStore } from "@/store/store";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { apiUrl, FailFlag } from "@/lib/constants";
+import axios from "axios";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { Loader2 } from "lucide-react";
+import useAuth from "@/hooks/useAuth";
 
-const SectionOrder = () => {
+const SectionOrder = ({ resumeId }: { resumeId: string | undefined }) => {
+  const { user } = useAuth();
   const { sectionsOrder, updateSectionOrder } = useSectionStore();
-
+  const [loading, setLoading] = useState(false);
+  const personal = useResumeState((state) => state.personal);
+  const education = useResumeState((state) => state.education);
+  const experience = useResumeState((state) => state.experience);
+  const skills = useResumeState((state) => state.skills);
+  const projects = useResumeState((state) => state.projects);
+  const sectionOrder = useResumeState((state) => state.sectionOrder);
+  const resumeSectionOrder = useResumeState(
+    (state) => state.updateSectionOrder
+  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
 
@@ -18,10 +30,37 @@ const SectionOrder = () => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     updateSectionOrder(items);
+    resumeSectionOrder(sectionsOrder);
   };
 
-  const saveData = () => {
+  const saveData = async () => {
     try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${apiUrl}/resume/saveAllData`,
+        {
+          email: user!.email,
+          resumeId,
+          personal,
+          education,
+          skills,
+          experience,
+          projects,
+          sectionOrder,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setLoading(false);
+      if (response.data.errorCode == FailFlag) {
+        toast.error(response.data.message);
+      } else {
+        toast.success(response.data.message);
+      }
     } catch (e) {
       console.log("Error in save Data ::" + e);
       toast.error("Something went wrong");
@@ -76,7 +115,11 @@ const SectionOrder = () => {
             className="bg-blue-800 hover:bg-blue-900 p-x-2 w-44"
             onClick={() => saveData()}
           >
-            Save All The Details
+            {loading ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              "Save All The Details"
+            )}
           </Button>
         </div>
       </div>

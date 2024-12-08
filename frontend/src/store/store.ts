@@ -234,6 +234,7 @@ type ResumeState = {
   experience: ExperienceFormStore[];
   skills: Skills;
   projects: ProjectsFormState[];
+  sectionOrder: string[];
 
   setPersonal: (personal: Omit<PersonalFormType, "updateField">) => void;
 
@@ -253,6 +254,7 @@ type ResumeState = {
   addProject: (project: ProjectsFormState) => void;
   updateProject: (id: string, updatedProject: ProjectsFormState) => void;
   deleteProject: (id: string) => void;
+  updateSectionOrder: (sectionOrder: string[]) => void;
 };
 
 export const useResumeState = create<ResumeState>((set) => ({
@@ -274,6 +276,7 @@ export const useResumeState = create<ResumeState>((set) => ({
   },
 
   projects: [],
+  sectionOrder: ["Education", "Experience", "Projects", "Skills"],
 
   setPersonal: (personal) => set(() => ({ personal })),
   addEducation: (education) =>
@@ -316,4 +319,5 @@ export const useResumeState = create<ResumeState>((set) => ({
     set((state) => ({
       projects: state.projects.filter((proj) => proj.id !== id),
     })),
+  updateSectionOrder: (sectionOrder) => set(() => ({ sectionOrder })),
 }));

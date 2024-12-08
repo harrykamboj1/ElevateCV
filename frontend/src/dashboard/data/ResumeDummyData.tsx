@@ -124,9 +124,9 @@ export interface ResumeData {
     };
   };
   skills: {
-    languages: [];
-    frameworks: [];
-    developerTools: [];
+    languages: string[];
+    frameworks: string[];
+    developerTools: string[];
   };
   experience: {
     company: string;
@@ -158,11 +158,11 @@ export interface ResumeData {
     language: string;
     proficiency: string;
   }[];
-  volunteering: {
-    organization: string;
-    role: string;
-    duration: string;
-    responsibilities: string[];
-  }[];
+  // volunteering: {
+  //   organization: string;
+  //   role: string;
+  //   duration: string;
+  //   responsibilities: string[];
+  // }[];
   references: string;
 }
