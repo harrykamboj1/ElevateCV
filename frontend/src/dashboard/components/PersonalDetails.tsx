@@ -10,7 +10,7 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
   const { firstName, lastName, email, phone, linkedin, github, portfolio } =
     usePersonalFormStore();
   const formatLink = (url: string) => {
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    if (!url?.startsWith("http://") && !url?.startsWith("https://")) {
       return `https://${url}`;
     }
     return url;
@@ -19,25 +19,25 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
     <div>
       <div className="flex justify-center gap-x-1 pt-5">
         <h1 className="text-center text-2xl font-medium font-openSans">
-          {firstName ? firstName : resumeInfo?.basicInfo?.firstName}
+          {firstName ? firstName : resumeInfo?.personalDetails?.firstName}
         </h1>
 
         <h1 className="text-center text-2xl font-medium font-openSans">
-          {lastName ? lastName : resumeInfo?.basicInfo?.lastName}
+          {lastName ? lastName : resumeInfo?.personalDetails?.lastName}
         </h1>
       </div>
       <div className="text-xs font-normal text-center font-openSans">
-        <a href={`tel:${resumeInfo.basicInfo.contact.phone}`}>
-          {phone ? phone : resumeInfo.basicInfo.contact.phone}
+        <a href={`tel:${resumeInfo.personalDetails?.phone}`}>
+          {phone ? phone : resumeInfo.personalDetails?.phone}
         </a>
         {" | "}
-        <a href={`mailto:${resumeInfo.basicInfo.contact.email}`}>
-          {email ? email : resumeInfo.basicInfo.contact.email}
+        <a href={`mailto:${resumeInfo.personalDetails?.email}`}>
+          {email ? email : resumeInfo.personalDetails?.email}
         </a>
         {" | "}
         <a
           href={formatLink(
-            linkedin ? linkedin : resumeInfo.basicInfo.contact.linkedin
+            linkedin ? linkedin : resumeInfo.personalDetails?.linkedin
           )}
           target="_blank"
           rel="noopener noreferrer"
@@ -49,7 +49,7 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
         {" | "}
         <a
           href={formatLink(
-            github ? github : resumeInfo.basicInfo.contact.github
+            github ? github : resumeInfo.personalDetails?.github
           )}
           target="_blank"
           rel="noopener noreferrer"
@@ -58,23 +58,19 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
           Github
         </a>
 
-        {resumeInfo?.basicInfo?.contact?.portfolio && (
-          <>
-            {" | "}
-            <a
-              href={formatLink(
-                portfolio
-                  ? portfolio
-                  : resumeInfo?.basicInfo?.contact?.portfolio
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black underline"
-            >
-              Portfolio
-            </a>
-          </>
-        )}
+        <>
+          {" | "}
+          <a
+            href={formatLink(
+              portfolio ? portfolio : resumeInfo?.personalDetails?.portfolio
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-black underline"
+          >
+            Portfolio
+          </a>
+        </>
       </div>
     </div>
   );

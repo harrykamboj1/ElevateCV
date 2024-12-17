@@ -25,6 +25,9 @@ export type PersonalFormType = {
     field: keyof Omit<PersonalFormType, "updateField">,
     value: string
   ) => void;
+  setPersonal: (
+    personal: Omit<PersonalFormType, "updateField" | "setPersonal">
+  ) => void;
 };
 
 export const usePersonalFormStore = create<PersonalFormType>((set) => ({
@@ -41,6 +44,8 @@ export const usePersonalFormStore = create<PersonalFormType>((set) => ({
       ...state,
       [field]: value,
     })),
+
+  setPersonal: (personal) => set(personal),
 }));
 
 export type ExperienceFormStore = {
@@ -56,6 +61,7 @@ export type ExperienceFormStore = {
 
 export type ExperienceState = {
   experiences: ExperienceFormStore[];
+  setExperience: (experience: ExperienceFormStore[]) => void;
   addExperience: (experience: ExperienceFormStore) => void;
   updateExperience: (id: string, experience: ExperienceFormStore) => void;
   removeExperience: (id: string) => void;
@@ -63,7 +69,7 @@ export type ExperienceState = {
 
 export const useExperienceFormStore = create<ExperienceState>((set) => ({
   experiences: [],
-
+  setExperience: (experience) => set(() => ({ experiences: [...experience] })),
   addExperience: (experience) =>
     set((state) => ({
       experiences: [...state.experiences, experience],
@@ -92,6 +98,7 @@ export type EducationFormState = {
 
 export type EducationState = {
   educationDetails: EducationFormState[];
+  setEducation: (education: EducationFormState[]) => void;
   addEducation: (educationDetails: EducationFormState) => void;
   updateEducation: (id: string, educationDetails: EducationFormState) => void;
   removeEducation: (id: string) => void;
@@ -99,6 +106,8 @@ export type EducationState = {
 
 export const useEducationState = create<EducationState>((set) => ({
   educationDetails: [],
+  setEducation: (education) =>
+    set(() => ({ educationDetails: [...education] })),
 
   addEducation: (education) =>
     set((state) => ({
@@ -130,6 +139,17 @@ export type SkillsFormType = {
   removeLanguages: (language: string) => void;
   removeFrameworks: (framework: string) => void;
   removeDeveloperTools: (developerTool: string) => void;
+  setSkills: (
+    skills: Omit<
+      SkillsFormType,
+      | "addLanguages"
+      | "addFrameworks"
+      | "addDeveloperTools"
+      | "removeLanguages"
+      | "removeFrameworks"
+      | "removeDeveloperTools"
+    >
+  ) => void;
 };
 
 export const useSkillsFormState = create<SkillsFormType>((set) => ({
@@ -137,7 +157,7 @@ export const useSkillsFormState = create<SkillsFormType>((set) => ({
   languages: [],
   frameworks: [],
   developerTools: [],
-
+  setSkills: (skills) => set(skills),
   // Add methods
   addLanguages: (language) =>
     set((state) => ({
@@ -182,6 +202,7 @@ export type ProjectsFormState = {
 
 export type ProjectsState = {
   projects: ProjectsFormState[];
+  setProjects: (projects: ProjectsFormState[]) => void;
   addProjects: (project: ProjectsFormState) => void;
   updateProjects: (id: string, project: ProjectsFormState) => void;
   removeProjects: (id: string) => void;
@@ -189,6 +210,7 @@ export type ProjectsState = {
 
 export const useProjectsFormState = create<ProjectsState>((set) => ({
   projects: [],
+  setProjects: (projects) => set(() => ({ projects: [...projects] })),
 
   addProjects: (project) =>
     set((state) => ({
@@ -211,10 +233,13 @@ export const useProjectsFormState = create<ProjectsState>((set) => ({
 export type SectionState = {
   sectionsOrder: string[];
   updateSectionOrder: (newOrder: string[]) => void;
+  setSectionOrder: (sectionOrder: string[]) => void;
 };
 
 export const useSectionStore = create<SectionState>((set) => ({
   sectionsOrder: ["Education", "Experience", "Projects", "Skills"],
+  setSectionOrder: (sectionOrder) =>
+    set(() => ({ sectionsOrder: [...sectionOrder] })),
   updateSectionOrder: (newOrder: string[]) =>
     set(() => ({
       sectionsOrder: newOrder,
@@ -229,14 +254,16 @@ type Skills = {
 
 // Resume Type
 type ResumeState = {
-  personal: Omit<PersonalFormType, "updateField">;
+  personal: Omit<PersonalFormType, "updateField" | "setPersonal">;
   education: EducationFormState[];
   experience: ExperienceFormStore[];
   skills: Skills;
   projects: ProjectsFormState[];
   sectionOrder: string[];
 
-  setPersonal: (personal: Omit<PersonalFormType, "updateField">) => void;
+  setPersonal: (
+    personal: Omit<PersonalFormType, "updateField" | "setPersonal">
+  ) => void;
 
   addEducation: (education: EducationFormState) => void;
   updateEducation: (id: string, updatedEducation: EducationFormState) => void;

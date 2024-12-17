@@ -19,14 +19,14 @@ const Skills: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
           {" : "}
           <div className="flex">
             {languages.length == 0 &&
-              resumeInfo?.skills.languages.map((data, index) => (
+              resumeInfo?.skills?.languages?.map((data, index) => (
                 <p key={index} className="gap-x-2">
                   {index == 0 ? " " : ", "}
                   {data}
                 </p>
               ))}
             {languages.length > 0 &&
-              languages.map((data, index) => (
+              languages?.map((data, index) => (
                 <p key={index} className="gap-x-2">
                   {index == 0 ? " " : ", "}
                   {data}
@@ -48,7 +48,7 @@ const Skills: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
                 </p>
               ))}
             {frameworks.length == 0 &&
-              resumeInfo?.skills.frameworks.map((data, index) => (
+              resumeInfo?.skills?.frameworks?.map((data, index) => (
                 <p key={index} className="gap-x-2">
                   {index == 0 ? " " : ", "}
                   {data}
@@ -63,7 +63,7 @@ const Skills: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
           {" : "}
           <div className="flex">
             {developerTools.length == 0 &&
-              resumeInfo?.skills.developerTools.map((data, index) => (
+              resumeInfo?.skills?.developerTools?.map((data, index) => (
                 <p key={index} className="gap-x-2">
                   {index == 0 ? " " : ", "}
                   {data}

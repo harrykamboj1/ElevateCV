@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { apiUrl, FailFlag } from "@/lib/constants";
 import { useNavigate } from "react-router-dom";
+import { useResumeState } from "@/store/store";
 
 interface AddResumeProps {
   email: string;
@@ -24,6 +25,12 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const personal = useResumeState((state) => state.personal);
+  const education = useResumeState((state) => state.education);
+  const experience = useResumeState((state) => state.experience);
+  const skills = useResumeState((state) => state.skills);
+  const projects = useResumeState((state) => state.projects);
+  const sectionOrder = useResumeState((state) => state.sectionOrder);
 
   const onSubmit = async () => {
     setLoading(true);
@@ -31,7 +38,16 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
     try {
       const response = await axios.post(
         `${apiUrl}/resume/create`,
-        { email, title },
+        {
+          email,
+          title,
+          personal,
+          education,
+          skills,
+          experience,
+          projects,
+          sectionOrder,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,

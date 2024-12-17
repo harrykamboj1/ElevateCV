@@ -40,7 +40,7 @@ const Experience: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
       </h1>
       <hr></hr>
       {experiences.length == 0 &&
-        resumeInfo?.experience.map((data, index) => (
+        resumeInfo?.experience?.map((data, index) => (
           <div
             key={index}
             className="px-4 text-xs font-normal font-openSans cursor-pointer py-2"

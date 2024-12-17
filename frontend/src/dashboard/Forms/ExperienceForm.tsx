@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { v4 as uuid } from "uuid";
 import {
   ExperienceFormStore,
   useExperienceFormStore,
@@ -27,16 +28,13 @@ const ExperienceForm = () => {
   const resumeAddExp = useResumeState((state) => state.addExperience);
   const resumeRemoveExp = useResumeState((state) => state.deleteExperience);
   const updateResumeExp = useResumeState((state) => state.updateExperience);
-  const [index, setIndex] = useState(0);
   const { experiences, addExperience, removeExperience, updateExperience } =
     useExperienceFormStore();
 
   const handleAddExperience = () => {
-    const currentIndex = index + 1;
-    const experienceWithId = { ...formField, id: currentIndex.toString() };
+    const experienceWithId = { ...formField, id: uuid() };
     addExperience(experienceWithId);
     resumeAddExp(experienceWithId);
-    setIndex(currentIndex);
   };
 
   const handleDelete = () => {

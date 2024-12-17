@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { v4 as uuid } from "uuid";
 
 const formField: ProjectsFormState = {
   id: "",
@@ -28,14 +29,14 @@ const ProjectForm = () => {
   const resumeRemoveProject = useResumeState((state) => state.deleteProject);
   const updateResumeProject = useResumeState((state) => state.updateProject);
 
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
   const handleAddProjects = () => {
-    const currentIndex = index + 1;
+    // const currentIndex = index + 1;
 
-    const projectWithId = { ...formField, id: currentIndex.toString() };
+    const projectWithId = { ...formField, id: uuid() };
     addProjects(projectWithId);
     resumeAddProject(projectWithId);
-    setIndex(currentIndex);
+    // setIndex(currentIndex);
   };
 
   const handleDelete = () => {

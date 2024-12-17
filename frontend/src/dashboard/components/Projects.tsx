@@ -33,7 +33,7 @@ const Projects: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
       </h1>
       <hr></hr>
       {projects.length == 0 &&
-        resumeInfo?.projects.map((data, index) => (
+        resumeInfo?.projects?.map((data, index) => (
           <div
             key={index}
             className="px-3 text-xs font-normal font-openSans cursor-pointer py-3"

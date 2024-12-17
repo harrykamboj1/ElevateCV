@@ -1,18 +1,14 @@
 export const dummyData = {
-  basicInfo: {
+  personalDetails: {
     firstName: "John",
     lastName: "Doe",
     title: "Full Stack Developer",
-    contact: {
-      email: "john.doe@example.com",
-      phone: "+1 123-456-7890",
-      linkedin: "linkedin.com/in/johndoe",
-      github: "github.com/johndoe",
-      location: "New York, USA",
-      portfolio: "johnDoe.com",
-    },
-    summary:
-      "Passionate and detail-oriented Full Stack Developer with 5+ years of experience designing and implementing scalable web applications. Skilled in JavaScript, React, Node.js, and database management.",
+    email: "john.doe@example.com",
+    phone: "+1 123-456-7890",
+    linkedin: "linkedin.com/in/johndoe",
+    github: "github.com/johndoe",
+    location: "New York, USA",
+    portfolio: "johnDoe.com",
   },
   skills: {
     languages: ["JavaScript", "Java", "C++", "TypeScript"],
@@ -112,16 +108,14 @@ export const dummyData = {
 };
 
 export interface ResumeData {
-  basicInfo: {
+  personalDetails: {
     firstName: string;
     lastName: string;
-    contact: {
-      email: string;
-      phone: string;
-      linkedin: string;
-      github: string;
-      portfolio: string;
-    };
+    email: string;
+    phone: string;
+    linkedin: string;
+    github: string;
+    portfolio: string;
   };
   skills: {
     languages: string[];

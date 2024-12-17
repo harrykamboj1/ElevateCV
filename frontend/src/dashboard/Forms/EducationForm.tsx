@@ -7,7 +7,9 @@ import {
   useResumeState,
 } from "@/store/store";
 import { Plus } from "lucide-react";
-import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
+
+import React from "react";
 
 const formField: EducationFormState = {
   id: "",
@@ -20,7 +22,7 @@ const formField: EducationFormState = {
 const EducationForm = () => {
   const { educationDetails, addEducation, removeEducation, updateEducation } =
     useEducationState();
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
   const resumeAddEducation = useResumeState((state) => state.addEducation);
   const resumeRemoveEducation = useResumeState(
     (state) => state.deleteEducation
@@ -30,12 +32,12 @@ const EducationForm = () => {
   );
 
   const handleAddExperience = () => {
-    const currentIndex = index + 1;
+    // const currentIndex = index + 1;
 
-    const educationWithId = { ...formField, id: currentIndex.toString() };
+    const educationWithId = { ...formField, id: uuid() };
     addEducation(educationWithId);
     resumeAddEducation(educationWithId);
-    setIndex(currentIndex);
+    // setIndex(currentIndex);
   };
 
   const handleDelete = () => {

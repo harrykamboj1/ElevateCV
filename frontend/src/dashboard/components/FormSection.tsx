@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SectionOrder from "./SectionOrder";
+import { ResumeData } from "../data/ResumeDummyData";
 
 type FormType = {
   resumeId: string | undefined;
+  resumeInfo: ResumeData;
 };
 
 const FormSection: React.FC<FormType> = ({ resumeId }) => {
