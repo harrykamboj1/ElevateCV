@@ -14,6 +14,7 @@ import {
   useExperienceFormStore,
   usePersonalFormStore,
   useProjectsFormState,
+  useResumeState,
   useSectionStore,
   useSkillsFormState,
 } from "@/store/store";
@@ -22,12 +23,24 @@ export const EditResume = () => {
   const params = useParams();
   const { user, isLoading, isSignedIn } = useAuth();
   const [resumeInfo, setResumeInfo] = useState<ResumeData | null>(null);
+
   const setPersonal = usePersonalFormStore((state) => state.setPersonal);
   const setExperience = useExperienceFormStore((state) => state.setExperience);
   const setProjects = useProjectsFormState((state) => state.setProjects);
   const setSectionOrder = useSectionStore((state) => state.setSectionOrder);
   const setEducation = useEducationState((state) => state.setEducation);
   const setSkills = useSkillsFormState((state) => state.setSkills);
+
+  const setPersonalResumeData = useResumeState((state) => state.setPersonal);
+  const setExperienceResumeData = useResumeState(
+    (state) => state.setExperience
+  );
+  const setProjectsResumeData = useResumeState((state) => state.setProjects);
+  const setEducationResumeData = useResumeState((state) => state.setEducation);
+  const setSkillsResumeData = useResumeState((state) => state.setSkills);
+  const setSectionResumeData = useResumeState(
+    (state) => state.updateSectionOrder
+  );
   useEffect(() => {
     const fetchResumeDataById = async (resumeId: string) => {
       try {
@@ -53,16 +66,26 @@ export const EditResume = () => {
             },
           }
         );
-        console.log(response?.data?.resume);
         if (response?.data?.resume) {
-          // setResumeInfo(response.data!.resume);
-          setResumeInfo(dummyData);
+          setResumeInfo(response.data!.resume);
+
           setPersonal(response.data!.resume!.PersonalDetails);
+          setPersonalResumeData(response.data!.resume!.PersonalDetails);
+
           setExperience(response.data!.resume.Experience);
+          setExperienceResumeData(response.data!.resume.Experience);
+
           setProjects(response.data!.resume.Projects);
+          setProjectsResumeData(response.data!.resume.Projects);
+
           setEducation(response.data!.resume.Education);
+          setEducationResumeData(response.data!.resume.Education);
+
           setSkills(response.data!.resume.Skills);
+          setSkillsResumeData(response.data!.resume.Skills);
+
           setSectionOrder(response.data!.resume.SectionOrder.order);
+          setSectionResumeData(response.data!.resume.SectionOrder.order);
         } else {
           toast.error("No Resume Details Found");
           setResumeInfo(dummyData);

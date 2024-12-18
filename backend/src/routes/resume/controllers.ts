@@ -189,14 +189,9 @@ export const saveAllResumeData = async (req: Request, res: Response) => {
         .status(200)
         .json({ message: "No Resume Found", errorCode: Fail });
 
-    const pendingResp = await updateResumeData(
-      resumeId,
-      projects,
-      experience,
-      education
-    );
+    await updateResumeData(resumeId, projects, experience, education);
 
-    const response = await prisma.resume.update({
+    await prisma.resume.update({
       where: {
         resumeId,
         userId: user!.id,
@@ -262,7 +257,6 @@ const updateResumeData = async (
 
 const updateExperience = async (resumeId: string, experience: any[]) => {
   try {
-    console.log(experience);
     const existingExperience = await prisma.experience.findMany({
       where: { resumeResumeId: resumeId },
     });
@@ -274,7 +268,9 @@ const updateExperience = async (resumeId: string, experience: any[]) => {
       existingExpIds.includes(exp.id)
     );
 
-    const expToCreate = experience.filter((exp) => !exp.id);
+    const expToCreate = experience.filter(
+      (exp) => !expToUpdate.includes(exp.id)
+    );
 
     const expToDelete = existingExperience.filter(
       (project) => !incomingExpIds.includes(project.id)
@@ -284,6 +280,7 @@ const updateExperience = async (resumeId: string, experience: any[]) => {
       prisma.experience.update({
         where: { id: exp.id, resumeResumeId: resumeId },
         data: {
+          id: exp.id,
           company: exp.company,
           isPresent: exp.isPresent,
           location: exp.location,
@@ -298,7 +295,7 @@ const updateExperience = async (resumeId: string, experience: any[]) => {
     const createPromises = expToCreate.map((exp) =>
       prisma.experience.create({
         data: {
-          id: uuid(),
+          id: exp.id,
           resumeResumeId: resumeId,
           company: exp.company,
           isPresent: exp.isPresent,
@@ -357,6 +354,7 @@ const updateProjects = async (resumeId: string, projects: any[]) => {
       prisma.projects.update({
         where: { id: project.id, resumeResumeId: resumeId },
         data: {
+          id: project.id,
           title: project.title,
           description: project.description,
           startDate: project.startDate,
@@ -369,7 +367,7 @@ const updateProjects = async (resumeId: string, projects: any[]) => {
     const createPromises = projectsToCreate.map((project) =>
       prisma.projects.create({
         data: {
-          id: uuid(),
+          id: project.id,
           resumeResumeId: resumeId,
           title: project.title,
           description: project.description,
@@ -414,7 +412,9 @@ const updateEducation = async (resumeId: string, education: any[]) => {
     );
 
     // Education to create (no `id` present in incoming data)
-    const educationToCreate = education.filter((edu) => !edu.id);
+    const educationToCreate = education.filter(
+      (edu) => !educationToUpdate.includes(edu.id)
+    );
 
     // Education to delete (in DB but not in incoming data)
     const educationToDelete = existingEducation.filter(
@@ -426,6 +426,7 @@ const updateEducation = async (resumeId: string, education: any[]) => {
       prisma.education.update({
         where: { id: edu.id, resumeResumeId: resumeId },
         data: {
+          id: edu.id,
           institution: edu.institution,
           degree: edu.degree,
           graduationYear: edu.graduationYear,
@@ -437,7 +438,7 @@ const updateEducation = async (resumeId: string, education: any[]) => {
     const createPromises = educationToCreate.map((edu) =>
       prisma.education.create({
         data: {
-          id: uuid(),
+          id: edu.id,
           resumeResumeId: resumeId,
           institution: edu.institution,
           degree: edu.degree,

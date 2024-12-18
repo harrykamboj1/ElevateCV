@@ -268,6 +268,7 @@ type ResumeState = {
   addEducation: (education: EducationFormState) => void;
   updateEducation: (id: string, updatedEducation: EducationFormState) => void;
   deleteEducation: (id: string) => void;
+  setEducation: (education: EducationFormState[]) => void;
 
   addExperience: (experience: ExperienceFormStore) => void;
   updateExperience: (
@@ -275,12 +276,15 @@ type ResumeState = {
     updatedExperience: ExperienceFormStore
   ) => void;
   deleteExperience: (id: string) => void;
+  setExperience: (experience: ExperienceFormStore[]) => void;
 
   setSkills: (skills: Skills) => void;
 
   addProject: (project: ProjectsFormState) => void;
   updateProject: (id: string, updatedProject: ProjectsFormState) => void;
   deleteProject: (id: string) => void;
+  setProjects: (projects: ProjectsFormState[]) => void;
+
   updateSectionOrder: (sectionOrder: string[]) => void;
 };
 
@@ -318,6 +322,7 @@ export const useResumeState = create<ResumeState>((set) => ({
     set((state) => ({
       education: state.education.filter((edu) => edu.id !== id),
     })),
+  setEducation: (education) => set(() => ({ education: [...education] })),
 
   addExperience: (experience) =>
     set((state) => ({ experience: [...state.experience, experience] })),
@@ -331,6 +336,7 @@ export const useResumeState = create<ResumeState>((set) => ({
     set((state) => ({
       experience: state.experience.filter((exp) => exp.id !== id),
     })),
+  setExperience: (experience) => set(() => ({ experience: [...experience] })),
 
   setSkills: (skills) => set(() => ({ skills })),
 
@@ -346,5 +352,7 @@ export const useResumeState = create<ResumeState>((set) => ({
     set((state) => ({
       projects: state.projects.filter((proj) => proj.id !== id),
     })),
+  setProjects: (projects) => set(() => ({ projects: [...projects] })),
+
   updateSectionOrder: (sectionOrder) => set(() => ({ sectionOrder })),
 }));

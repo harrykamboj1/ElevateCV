@@ -65,6 +65,7 @@ const ExperienceForm = () => {
     const newEntries = experiences.slice();
     newEntries[index][name as keyof ExperienceFormStore] = e.target.value;
     updateExperience(newEntries[index].id, newEntries[index]);
+    updateResumeExp(newEntries[index].id, newEntries[index]);
   };
 
   const handleCheckChange = (
