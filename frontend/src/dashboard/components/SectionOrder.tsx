@@ -28,9 +28,9 @@ const SectionOrder = ({ resumeId }: { resumeId: string | undefined }) => {
     const items = Array.from(sectionsOrder);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
+    console.log(items);
     updateSectionOrder(items);
-    resumeSectionOrder(sectionsOrder);
+    resumeSectionOrder(items);
   };
 
   const saveData = async () => {

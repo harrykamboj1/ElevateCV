@@ -92,6 +92,18 @@ const PersonalForm = () => {
         </div>
         <div className="col-span-2 mt-4">
           <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
+            LinkedIn
+          </Label>
+          <Input
+            placeholder="linkedin.com/in/johndoe"
+            name="linkedIn"
+            value={linkedin}
+            onChange={(e) => handleInputChange("linkedin", e.target.value)}
+            className="mt-1 border-customDarkBlue focus:border-2 focus-visible:ring-transparent focus:text-customDarkBlue"
+          />
+        </div>
+        <div className="col-span-2 mt-4">
+          <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
             Github
           </Label>
           <Input
@@ -112,18 +124,6 @@ const PersonalForm = () => {
             value={portfolio}
             onChange={(e) => handleInputChange("portfolio", e.target.value)}
             className="mt-1 border-customDarkBlue focus:border-2 focus-visible:ring-transparent"
-          />
-        </div>
-        <div className="col-span-2 mt-4">
-          <Label className="text-sm text-customDarkBlue font-openSans font-semibold">
-            LinkedIn
-          </Label>
-          <Input
-            placeholder="linkedin.com/in/johndoe"
-            name="linkedIn"
-            value={linkedin}
-            onChange={(e) => handleInputChange("linkedin", e.target.value)}
-            className="mt-1 border-customDarkBlue focus:border-2 focus-visible:ring-transparent focus:text-customDarkBlue"
           />
         </div>
       </div>

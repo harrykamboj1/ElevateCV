@@ -30,47 +30,64 @@ const PersonalDetails: React.FC<ResumePreviewProps> = ({ resumeInfo }) => {
         <a href={`tel:${resumeInfo.personalDetails?.phone}`}>
           {phone ? phone : resumeInfo.personalDetails?.phone}
         </a>
-        {" | "}
-        <a href={`mailto:${resumeInfo.personalDetails?.email}`}>
-          {email ? email : resumeInfo.personalDetails?.email}
-        </a>
-        {" | "}
-        <a
-          href={formatLink(
-            linkedin ? linkedin : resumeInfo.personalDetails?.linkedin
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline"
-        >
-          LinkedIn
-        </a>
+        {email != "" && (
+          <>
+            {" "}
+            {phone != "" && " | "}
+            <a href={`mailto:${resumeInfo.personalDetails?.email}`}>
+              {email ? email : resumeInfo.personalDetails?.email}
+            </a>
+          </>
+        )}
 
-        {" | "}
-        <a
-          href={formatLink(
-            github ? github : resumeInfo.personalDetails?.github
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline"
-        >
-          Github
-        </a>
+        {linkedin != "" && (
+          <>
+            {(email != "" || phone != "") && " | "}
+            <a
+              href={formatLink(
+                linkedin ? linkedin : resumeInfo.personalDetails?.linkedin
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline"
+            >
+              LinkedIn
+            </a>
+          </>
+        )}
 
-        <>
-          {" | "}
-          <a
-            href={formatLink(
-              portfolio ? portfolio : resumeInfo?.personalDetails?.portfolio
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-black underline"
-          >
-            Portfolio
-          </a>
-        </>
+        {github != "" && (
+          <>
+            {(linkedin != "" || email != "" || phone != "") && " | "}
+            <a
+              href={formatLink(
+                github ? github : resumeInfo.personalDetails?.github
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline"
+            >
+              Github
+            </a>
+          </>
+        )}
+
+        {portfolio != "" && (
+          <>
+            {(github != "" || linkedin != "" || email != "" || phone != "") &&
+              " | "}
+            <a
+              href={formatLink(
+                portfolio ? portfolio : resumeInfo?.personalDetails?.portfolio
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline"
+            >
+              Portfolio
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

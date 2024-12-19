@@ -43,15 +43,7 @@ export const createResume = async (req: Request, res: Response) => {
         userId: user.id,
         email: user.email,
         PersonalDetails: {
-          create: {
-            firstName: personal.firstName,
-            lastName: personal.lastName,
-            phone: personal.phone,
-            email: personal.email,
-            github: personal.github,
-            portfolio: personal.portfolio,
-            linkedin: personal.linkedin,
-          },
+          create: {},
         },
         Education: {
           create: [],
@@ -63,11 +55,7 @@ export const createResume = async (req: Request, res: Response) => {
           create: [],
         },
         Skills: {
-          create: {
-            languages: skills.languages,
-            frameworks: skills.frameworks,
-            developerTools: skills.developerTools,
-          },
+          create: {},
         },
         SectionOrder: {
           create: {

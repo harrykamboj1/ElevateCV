@@ -34,12 +34,12 @@ model Resume {
 
 model PersonalDetails {
   resumeId  String @id @default(uuid())
-  firstName String
-  lastName  String
+  firstName String @default("")
+  lastName  String @default("")
   phone     String @default("")
-  email     String
-  github    String
-  portfolio String
+  email     String @default("")
+  github    String @default("")
+  portfolio String @default("")
   linkedin  String @default("")
 
   createdAt  DateTime @default(now())
@@ -76,9 +76,9 @@ model Education {
 
 model Skills {
   resumeResumeId String   @id @default(uuid())
-  languages      String[]
-  frameworks     String[]
-  developerTools String[]
+  languages      String[] @default([])
+  frameworks     String[] @default([])
+  developerTools String[] @default([])
   createdAt      DateTime @default(now())
   modifiedAt     DateTime @default(now())
   Resume         Resume   @relation(fields: [resumeResumeId], references: [resumeId])

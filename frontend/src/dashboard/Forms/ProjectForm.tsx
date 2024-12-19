@@ -136,6 +136,7 @@ const ProjectForm = () => {
           </div>
           <div className="mt-4">
             <TextEditor
+              saveValue={val.description}
               index={index}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}

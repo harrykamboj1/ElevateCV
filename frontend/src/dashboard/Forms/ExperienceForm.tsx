@@ -187,6 +187,7 @@ const ExperienceForm = () => {
             </div>
             <div className="mt-4">
               <TextEditor
+                saveValue={val.responsibilities}
                 index={index}
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BtnBold,
   BtnBulletList,
@@ -33,6 +33,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 type TextEditorProps = {
+  saveValue: string;
   index: number;
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,6 +42,7 @@ type TextEditorProps = {
 const PROMPT =
   "position title: {positionTitle} , Depends on position title and my skills i.e {skills} give me 4-5 bullet points for my experience in resume (Please do not add experince level and No JSON array), give me result in HTML format and give only one result and donot include html tag just give <ul> tags";
 const TextEditor: React.FC<TextEditorProps> = ({
+  saveValue,
   index,
   openDialog,
   setOpenDialog,
@@ -53,6 +55,9 @@ const TextEditor: React.FC<TextEditorProps> = ({
   const [loading, setLoading] = useState(false);
   const [skills, setSkills] = useState("");
 
+  useEffect(() => {
+    setValue(saveValue);
+  }, [saveValue]);
   const onSubmit = async () => {
     try {
       setLoading(true);
