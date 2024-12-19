@@ -269,7 +269,7 @@ const updateExperience = async (resumeId: string, experience: any[]) => {
     );
 
     const expToCreate = experience.filter(
-      (exp) => !expToUpdate.includes(exp.id)
+      (exp) => !existingExpIds.includes(exp.id)
     );
 
     const expToDelete = existingExperience.filter(
@@ -332,19 +332,18 @@ const updateProjects = async (resumeId: string, projects: any[]) => {
     });
 
     const existingProjectIds = existingProjects.map((project) => project.id);
-
     const incomingProjectIds = projects
       .map((project) => project.id)
       .filter(Boolean);
-
     // Projects to update (present in both incoming data and DB)
     const projectsToUpdate = projects.filter((project) =>
       existingProjectIds.includes(project.id)
     );
     // Projects to create (no `id` present in incoming data)
     const projectsToCreate = projects.filter(
-      (project) => !projectsToUpdate.includes(project.id)
+      (project) => !existingProjectIds.includes(project.id)
     );
+    console.log(projectsToCreate);
     // Projects to delete (in DB but not in incoming data)
     const projectsToDelete = existingProjects.filter(
       (project) => !incomingProjectIds.includes(project.id)
@@ -413,7 +412,7 @@ const updateEducation = async (resumeId: string, education: any[]) => {
 
     // Education to create (no `id` present in incoming data)
     const educationToCreate = education.filter(
-      (edu) => !educationToUpdate.includes(edu.id)
+      (edu) => !existingEducationIds.includes(edu.id)
     );
 
     // Education to delete (in DB but not in incoming data)
