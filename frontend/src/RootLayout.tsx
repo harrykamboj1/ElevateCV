@@ -7,9 +7,9 @@ const RootLayout = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-white">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-customDarkGrey">
         <ScaleLoader
-          color={"#072354"}
+          color={"#dc2626"}
           height={60}
           width={10}
           radius={6}

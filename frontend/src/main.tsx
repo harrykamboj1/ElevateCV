@@ -8,6 +8,7 @@ import { LandingPage } from "./Home/LandingPage";
 import Dashboard from "./dashboard/dashboard";
 import { EditResume } from "./dashboard/resume/[resumeId]/EditResume";
 import RootLayout from "./RootLayout";
+import DownloadResume from "./download/resume/[resumeId]/DownloadResume";
 
 const router = createBrowserRouter([
   {
@@ -31,9 +32,14 @@ const router = createBrowserRouter([
     path: "/auth/sign-up",
     element: <SignUpPage />,
   },
+
   {
     element: <RootLayout />,
     children: [
+      {
+        path: "/download/resume/:resumeId",
+        element: <DownloadResume />,
+      },
       {
         path: "/dashboard/resume/edit/:resumeId",
         element: <EditResume />,

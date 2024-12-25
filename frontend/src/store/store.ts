@@ -1,5 +1,18 @@
 import { create } from "zustand";
 
+type DataSaveType = {
+  isDataSave: boolean;
+};
+
+type DataSaveAction = {
+  setIsDataSave: (isDataSave: DataSaveType["isDataSave"]) => void;
+};
+
+export const useDataSaveType = create<DataSaveType & DataSaveAction>((set) => ({
+  isDataSave: false,
+  setIsDataSave: (isDataSave) => set({ isDataSave: isDataSave }),
+}));
+
 type formStoreType = {
   formIndex: number;
 };

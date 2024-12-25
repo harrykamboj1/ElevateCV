@@ -1,31 +1,34 @@
-import FormSection from "@/dashboard/components/FormSection";
+import Header from "@/components/custom/Header";
+import { Button } from "@/components/ui/button";
 import ResumePreviewSection from "@/dashboard/components/ResumePreviewSection";
-import { dummyData, ResumeData } from "@/dashboard/data/ResumeDummyData";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { ResumeData } from "@/dashboard/data/ResumeDummyData";
+import useAuth from "@/hooks/useAuth";
 import { apiUrl } from "@/lib/constants";
 
-import { Navigate, useParams } from "react-router-dom";
-import { ScaleLoader } from "react-spinners";
-import useAuth from "@/hooks/useAuth";
 import {
-  useDataSaveType,
   useEducationState,
   useExperienceFormStore,
   usePersonalFormStore,
   useProjectsFormState,
-  useResumeState,
   useSectionStore,
   useSkillsFormState,
 } from "@/store/store";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Navigate, useParams } from "react-router-dom";
+import { ScaleLoader } from "react-spinners";
+import ShareResume from "@/dashboard/components/Share";
 
-export const EditResume = () => {
+const DownloadResume = () => {
   const params = useParams();
   const { user, isLoading, isSignedIn } = useAuth();
-  const [title, setTitle] = useState("");
+  const [isShareOpen, setIsShareOpen] = useState(false);
+
+  const openShare = () => setIsShareOpen(true);
+  const closeShare = () => setIsShareOpen(false);
   const [resumeInfo, setResumeInfo] = useState<ResumeData | null>(null);
-  const setIsDataSave = useDataSaveType((state) => state.setIsDataSave);
+  const [title, setTitle] = useState("");
   const setPersonal = usePersonalFormStore((state) => state.setPersonal);
   const setExperience = useExperienceFormStore((state) => state.setExperience);
   const setProjects = useProjectsFormState((state) => state.setProjects);
@@ -33,16 +36,6 @@ export const EditResume = () => {
   const setEducation = useEducationState((state) => state.setEducation);
   const setSkills = useSkillsFormState((state) => state.setSkills);
 
-  const setPersonalResumeData = useResumeState((state) => state.setPersonal);
-  const setExperienceResumeData = useResumeState(
-    (state) => state.setExperience
-  );
-  const setProjectsResumeData = useResumeState((state) => state.setProjects);
-  const setEducationResumeData = useResumeState((state) => state.setEducation);
-  const setSkillsResumeData = useResumeState((state) => state.setSkills);
-  const setSectionResumeData = useResumeState(
-    (state) => state.updateSectionOrder
-  );
   useEffect(() => {
     const fetchResumeDataById = async (resumeId: string) => {
       try {
@@ -72,33 +65,24 @@ export const EditResume = () => {
           setResumeInfo(response.data!.resume);
           setTitle(response.data!.resume.title);
           setPersonal(response.data!.resume!.PersonalDetails);
-          setPersonalResumeData(response.data!.resume!.PersonalDetails);
 
           setExperience(response.data!.resume.Experience);
-          setExperienceResumeData(response.data!.resume.Experience);
 
           setProjects(response.data!.resume.Projects);
-          setProjectsResumeData(response.data!.resume.Projects);
 
           setEducation(response.data!.resume.Education);
-          setEducationResumeData(response.data!.resume.Education);
 
           setSkills(response.data!.resume.Skills);
-          setSkillsResumeData(response.data!.resume.Skills);
 
           setSectionOrder(response.data!.resume.SectionOrder.order);
-          setSectionResumeData(response.data!.resume.SectionOrder.order);
-          setIsDataSave(false);
         } else {
           toast.error("No Resume Details Found");
           setResumeInfo(dummyData);
-          setIsDataSave(false);
         }
       } catch (e) {
         console.error("Error in fetching resume data:", e);
         toast.error("Something went wrong while fetching the resume.");
         setResumeInfo(dummyData);
-        setIsDataSave(false);
       }
     };
 
@@ -125,17 +109,58 @@ export const EditResume = () => {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
+  const handleDownload = () => {
+    window.print();
+  };
+
   return (
     <>
-      <Toaster />
-      <div className="flex p-6 gap-x-5 h-screen">
-        <div className="flex-1">
-          <FormSection resumeId={params.resumeId!} resumeInfo={resumeInfo} />
-        </div>
-        <div className="flex-1">
-          <ResumePreviewSection resumeInfo={resumeInfo} title={title} />
+      <div id="noPrint">
+        <Header />
+        <div className="my-10 mx-10 md:mx-20 lg:mx-40">
+          <h2 className="text-red-600 text-2xl font-dmSans font-bold text-center">{`${
+            user!.name
+          } Your ${title} Resume is ready!`}</h2>
+          <p className="text-white text-center font-dmSans">
+            Download and Share and get Ready for Job Hunt
+          </p>
+          <div className="flex justify-between">
+            <Button
+              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              onClick={() => handleDownload()}
+            >
+              Download
+            </Button>
+            <Button
+              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              onClick={() => openShare()}
+            >
+              Share
+            </Button>
+          </div>
         </div>
       </div>
+      <div className="my-10 mx-20 md:mx-20 lg:mx-80" id="print">
+        <ResumePreviewSection resumeInfo={resumeInfo} title={title} />
+      </div>
+      {isShareOpen && (
+        <div className="fixed inset-0 bg-customDarkGrey   bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-customDarkGrey p-6 rounded-lg border-2 border-neutral-600  shadow-lg text-center">
+            <h2 className="text-2xl font-dmSans text-red-600 font-bold ">
+              Share the Resume
+            </h2>
+            <ShareResume resumeId={params!.resumeId} />
+            <Button
+              onClick={closeShare}
+              className="font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+            >
+              Close
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
+
+export default DownloadResume;

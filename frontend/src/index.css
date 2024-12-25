@@ -9,3 +9,17 @@ ol {
   list-style-type: decimal;
   margin-left: 20px;
 }
+
+@media print {
+  #noPrint {
+    display: none;
+  }
+
+  #title {
+    display: none;
+  }
+
+  #print {
+    display: block;
+  }
+}

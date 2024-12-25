@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa"; // Icon for edit
-import { MdDateRange } from "react-icons/md"; // Icon for date
+import { MdDateRange } from "react-icons/md";
+import { Trash2 } from "lucide-react";
 
 interface ResumeCardProps {
   resume: {
@@ -13,51 +13,58 @@ interface ResumeCardProps {
   };
   key: number;
   cardKey: number;
+  handleDeleteResumeId: (resumeId: string, resumeName: string) => void;
+  setIsDeleteOpenFxn: () => void;
 }
 
-const ResumeCard: React.FC<ResumeCardProps> = ({ resume, cardKey }) => {
+const ResumeCard: React.FC<ResumeCardProps> = ({
+  resume,
+  cardKey,
+  handleDeleteResumeId,
+  setIsDeleteOpenFxn,
+}) => {
+  const openDelete = () => {
+    handleDeleteResumeId(resume.resumeId, resume.title);
+    setIsDeleteOpenFxn();
+  };
   return (
-    <Link to={`/dashboard/resume/edit/${resume.resumeId}`}>
+    <>
       <div
         key={cardKey}
-        className="relative border p-4 shadow-md hover:cursor-pointer bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg h-64 overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl"
+        className="flex-col border rounded-md relative flex aspect-[1/1.4142] hover:scale-105 shadow-lg border-red-600 cursor-pointer items-center justify-center bg-[#27272a] p-0 transition-transform space-y-0"
       >
-        {/* Background Icon */}
-        <div className="absolute inset-0 opacity-10">
-          <img
-            src="https://via.placeholder.com/400" // Replace with a better placeholder or design image
-            alt="Background pattern"
-            className="object-cover w-full h-full"
-          />
-        </div>
-
-        {/* Header Icon */}
         <div className="absolute top-4 right-4 z-10 text-white opacity-80">
-          <FaEdit
+          <Trash2
+            onClick={(e) => {
+              e.stopPropagation();
+              openDelete();
+            }}
             size={24}
-            className="hover:opacity-100 transition-opacity duration-300"
+            className="hover:opacity-100 transition-opacity duration-300 cursor-pointer"
           />
         </div>
 
-        {/* Content */}
-        <div className="absolute bottom-6 left-6 z-10 text-white">
-          <h1 className="font-semibold text-2xl font-openSans mb-1">
-            {resume.title}
-          </h1>
+        <Link
+          to={`/dashboard/resume/edit/${resume.resumeId}`}
+          className="absolute inset-0"
+        >
+          <div className="absolute bottom-6 left-6 z-10 text-white">
+            <h1 className="text-red-600 text-[18px] font-semibold font-dmSans mb-1">
+              {resume.title}
+            </h1>
 
-          <div className="flex items-center text-sm text-gray-200 font-medium">
-            <MdDateRange size={16} className="mr-2" />
-            Modified on:{" "}
-            {resume.modifiedAt
-              ? new Date(resume.modifiedAt).toLocaleDateString()
-              : "N/A"}
+            <div className="flex items-center text-sm text-white font-medium">
+              <MdDateRange size={16} className="mr-2" />
+              Modified on:{" "}
+              {resume.modifiedAt
+                ? new Date(resume.modifiedAt).toLocaleDateString()
+                : "N/A"}
+            </div>
           </div>
-        </div>
-
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-40 transition-opacity duration-300 hover:opacity-60 rounded-lg"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-40 transition-opacity duration-300 hover:opacity-60 rounded-lg"></div>
+        </Link>
       </div>
-    </Link>
+    </>
   );
 };
 

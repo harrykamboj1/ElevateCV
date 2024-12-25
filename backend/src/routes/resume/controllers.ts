@@ -14,29 +14,21 @@ export const createResume = async (req: Request, res: Response) => {
     if (!token) return res.status(401).json({ error: "Unauthorized" });
     // const parseData = createResumeSchema.parse(req.body);
     // const { email, title } = parseData;
-    const {
-      email,
-      title,
-      personal,
-      projects,
-      sectionOrder,
-      experience,
-      skills,
-      education,
-    } = req.body;
+    const { email, title, sectionOrder } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user)
       return res
         .status(200)
         .json({ message: "Invalid email or password", errorCode: "-1" });
-
-    const existingResume = await prisma.resume.findUnique({
-      where: { title },
+    const existingResume = await prisma.resume.findMany({
+      where: { AND: [{ title: title }, { userId: user.id }] },
     });
-    if (existingResume)
+    if (existingResume.length > 0) {
       return res
         .status(200)
         .json({ message: "Resume with Title Already Exists", errorCode: "-1" });
+    }
+
     const resume = await prisma.resume.create({
       data: {
         title,
@@ -109,7 +101,6 @@ export const getResumeById = async (req: Request, res: Response) => {
       return res
         .status(200)
         .json({ message: "No Resume Found", errorCode: Fail });
-    console.log(resume);
     return res.status(200).json({ resume });
   } catch (e) {
     console.error(e);
@@ -331,7 +322,6 @@ const updateProjects = async (resumeId: string, projects: any[]) => {
     const projectsToCreate = projects.filter(
       (project) => !existingProjectIds.includes(project.id)
     );
-    console.log(projectsToCreate);
     // Projects to delete (in DB but not in incoming data)
     const projectsToDelete = existingProjects.filter(
       (project) => !incomingProjectIds.includes(project.id)
@@ -452,5 +442,79 @@ const updateEducation = async (resumeId: string, education: any[]) => {
   } catch (error) {
     console.error("Error updating education:", error);
     throw new Error("Failed to update education");
+  }
+};
+
+export const deleteResumeById = async (req: Request, res: Response) => {
+  try {
+    const { deleteResumeId, email } = req.body;
+
+    const token = req.headers.authorization?.split(EMPTY_SPACE)[1];
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return res
+        .status(200)
+        .json({ message: "Invalid email or password", errorCode: "-1" });
+    }
+
+    const resume = await prisma.resume.findUnique({
+      where: { email, resumeId: deleteResumeId },
+    });
+    if (!resume) {
+      return res
+        .status(200)
+        .json({ message: "No Resume Found", errorCode: Fail });
+    }
+    const personalDetails = await prisma.personalDetails.findUnique({
+      where: { resumeId: deleteResumeId },
+    });
+
+    if (personalDetails) {
+      await prisma.personalDetails.delete({
+        where: { resumeId: deleteResumeId },
+      });
+    } else {
+      console.log(`PersonalDetails not found for resumeId: ${deleteResumeId}`);
+    }
+    await prisma.education.deleteMany({
+      where: {
+        resumeResumeId: deleteResumeId,
+      },
+    });
+    await prisma.experience.deleteMany({
+      where: {
+        resumeResumeId: deleteResumeId,
+      },
+    });
+    await prisma.projects.deleteMany({
+      where: {
+        resumeResumeId: deleteResumeId,
+      },
+    });
+    await prisma.skills.deleteMany({
+      where: {
+        resumeResumeId: deleteResumeId,
+      },
+    });
+    await prisma.sectionOrder.deleteMany({
+      where: {
+        resumeResumeId: deleteResumeId,
+      },
+    });
+    await prisma.resume.delete({
+      where: { email, resumeId: deleteResumeId },
+    });
+    return res.status(200).json({
+      message: "Resume Deleted Successfully",
+      errorCode: "1",
+    });
+  } catch (e) {
+    console.log("Exception in delete Resume :: " + e);
+    res.status(200).json({
+      message: "Something went wrong",
+      errorCode: Fail,
+    });
   }
 };

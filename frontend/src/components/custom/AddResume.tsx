@@ -69,26 +69,27 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
   return (
     <>
       <Toaster />
+
       <div
-        className="border p-10 py-24 items-center flex justify-center shadow-md hover:cursor-pointer bg-gray-100 rounded-lg h-60 hover:scale-105 hover:shadow-lg transition-all"
+        className="flex-col space-y-3 rounded border relative flex aspect-[1/1.4142]  cursor-pointer items-center justify-center bg-[#27272a] p-0 hover:scale-105 transition-all shadow-md hover:shadow-xl "
         onClick={() => setOpenDialog(true)}
       >
-        <PlusCircle className="text-gray-800" />
+        <PlusCircle className="text-white text-lg" />
       </div>
 
       <Dialog open={openDialog}>
-        <DialogContent>
+        <DialogContent className="bg-neutral-900">
           <DialogHeader>
-            <DialogTitle className="text-xl font-openSans text-customDarkBlue font-bold">
+            <DialogTitle className="text-2xl font-dmSans text-white font-bold">
               Create a New Resume
             </DialogTitle>
             <DialogDescription>
               <div className="my-4">
-                <p className="text-gray-400 font-openSans  text-sm">
+                <p className="text-red-600 font-dmSans  font-semibold text-md">
                   Write a Title for your resume
                 </p>
                 <Input
-                  className="mt-2 text-customDarkBlue font-openSans"
+                  className="mt-2 bg-neutral-950 text-white text-lg font-dmSans"
                   placeholder="Eg. SDE Resume"
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -98,14 +99,14 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
           <DialogFooter>
             <Button
               onClick={() => setOpenDialog(false)}
-              className="bg-gray-400 outline-double hover:bg-gray-600"
+              className="bg-neutral-600  rounded-md flex items-center px-8  hover:bg-neutral-800"
             >
               Cancel
             </Button>
             <Button
               onClick={() => onSubmit()}
               disabled={!title}
-              className="bg-blue-900 hover:bg-customDarkBlue"
+              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Create"}
             </Button>

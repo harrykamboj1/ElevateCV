@@ -14,20 +14,22 @@ const Header = () => {
   return (
     <>
       <Toaster />
-      <div className="p-3 px-5 justify-between flex shadow-md bg-white">
-        <div className="flex items-center gap-x-2 hover:cursor-pointer">
-          <img src="/logo.svg" width={35} height={35} alt="logo" />
-          <h1 className="font-openSans font-semibold text-2xl">Resume Buddy</h1>
-        </div>
+      <div className="static p-3 px-5 justify-between flex shadow-md bg-[#0d0d0d]">
+        <a href="/" className="flex items-center gap-x-4 hover:cursor-pointer">
+          <img src="/tufLogo.png" width={35} height={35} alt="logo" />
+          <h1 className="text-2xl font-semibold font-dmSans text-white  leading-none mb-4 mt-3">
+            Resume Builder
+          </h1>
+        </a>
         {!isSignedIn ? (
           <Link to={"/auth/sign-in"}>
-            <Button className="bg-blue-800 hover:bg-blue-900">
+            <Button className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700">
               Get Started
             </Button>
           </Link>
         ) : (
           <Button
-            className="bg-blue-800 hover:bg-blue-900"
+            className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
             onClick={() => LogOut()}
           >
             Logout

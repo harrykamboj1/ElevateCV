@@ -45,36 +45,38 @@ const SignInPage = () => {
 
   return (
     <>
-      <div>
-        <Toaster />
-      </div>
-      <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 animate-fade-in bg-white">
+      <Toaster />
+
+      <div className="min-h-screen bg-[#000000e8] grid grid-cols-1 lg:grid-cols-2 animate-fade-in ">
         <div className="h-full lg:flex flex-col items-center justify-center px-4 ">
-          <div className="text-center space-y-4 pt-16">
+          {/* <div className="text-center space-y-4 pt-16">
             <h1 className="font-openSans text-3xl text-[#2E2A47]">
               Welcome to <span className="font-semibold">Resume Buddy</span>
             </h1>
-          </div>
-          <p className="text-base text-[#7E8CA0] ">
-            Create an account to get back to your dashboard
+          </div> */}
+          <p className="text-lg font-dmSans text-white ">
+            Login to get back to your dashboard
           </p>
 
-          <div className="border-2 p-8 mt-8 rounded-xl shadow-lg">
+          <div className="border-2 p-8 mt-8  border-zinc-500  rounded-xl  shadow-xl      bg-customDarkGrey ">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
+                className="space-y-4 "
               >
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-red-600 font-dmSans font-semibold text-md">
+                        Email
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          className="w-72"
+                          autoComplete="off"
+                          className="w-72 font-dmSans border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                           placeholder="Enter your Email Address"
                           {...field}
                         />
@@ -89,11 +91,14 @@ const SignInPage = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel className="text-red-600 font-dmSans font-semibold text-md">
+                        Password
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="password"
-                          className="w-72"
+                          autoComplete="off"
+                          className="w-72 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                           placeholder="Enter your Password"
                           {...field}
                         />
@@ -104,17 +109,17 @@ const SignInPage = () => {
                   )}
                 />
                 <Button
-                  className="bg-blue-800  hover:bg-blue-900 font-openSans w-28"
+                  className="bg-red-600  hover:bg-red-700 font-dmSans w-28"
                   type="submit"
                 >
                   Sign In
                 </Button>
-                <p className="text-[#7E8CA0] text-sm">
+                <p className="text-white font-dmSans text-sm">
                   New Here?{" "}
                   <span>
                     <Link
                       to={"/auth/sign-up"}
-                      className="hover:text-customDarkBlue hover:font-semibold"
+                      className="hover:text-red-600 hover:font-semibold"
                     >
                       Sign up
                     </Link>
@@ -126,9 +131,9 @@ const SignInPage = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="h-full bg-[#1a1450] flex flex-col items-center justify-center animate-fade-in">
+        <div className="h-full bg-black flex flex-col items-center justify-center animate-fade-in">
           <div className="flex items-center justify-center space-x-3 mb-4 animate-fade-in-up">
-            <svg
+            {/* <svg
               id="logo-86"
               width="40"
               height="40"
@@ -150,12 +155,13 @@ const SignInPage = () => {
                 d="M10 5.16562e-07C10 1.31322 9.74135 2.61358 9.2388 3.82683C8.73625 5.04009 7.99966 6.14248 7.07107 7.07107C6.14249 7.99966 5.0401 8.73625 3.82684 9.2388C2.61358 9.74134 1.31322 10 5.4439e-06 10L5.00679e-06 20C2.62644 20 5.22716 19.4827 7.65368 18.4776C10.0802 17.4725 12.285 15.9993 14.1421 14.1421C15.9993 12.285 17.4725 10.0802 18.4776 7.65367C19.4827 5.22715 20 2.62643 20 -3.81469e-06L10 5.16562e-07Z"
                 fill="#007DFC"
               ></path>
-            </svg>
-            <p className="text-white text-4xl font-openSans font-semibold animate-fade-in">
-              Resume Buddy
+            </svg> */}
+            <img src="/tufLogo.png" width={55} height={45} alt="logo" />
+            <p className="text-white text-4xl font-dmSans font-semibold animate-fade-in">
+              Resume Builder
             </p>
           </div>
-          <p className="text-[#dee0e2] font-semibold text-xl text-center animate-fade-in-up">
+          <p className="text-[#dee0e2] font-semibold text-xl text-center font-dmSans animate-fade-in-up">
             Get Hired Faster with AI-Enhanced Resumes Built to Impress!
           </p>
         </div>

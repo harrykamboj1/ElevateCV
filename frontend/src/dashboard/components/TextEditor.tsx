@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/dialog";
 import toast, { Toaster } from "react-hot-toast";
 import { aiChatSession } from "../../../service/generativeAi";
-import { useExperienceFormStore } from "@/store/store";
+import { useExperienceFormStore, useResumeState } from "@/store/store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
@@ -40,7 +40,7 @@ type TextEditorProps = {
   onTextEditorChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 const PROMPT =
-  "position title: {positionTitle} , Depends on position title and my skills i.e {skills} give me 4-5 bullet points for my experience in resume (Please do not add experince level and No JSON array), give me result in HTML format and give only one result and donot include html tag just give <ul> tags";
+  "position title: {positionTitle} , Depends on position title and my skills i.e {skills} give me 4-5 bullet points for my experience in resume (Please do not add experience level and No JSON array), give me result in HTML format and give only one result and remove html tags, just give <ul> tags";
 const TextEditor: React.FC<TextEditorProps> = ({
   saveValue,
   index,
@@ -48,7 +48,10 @@ const TextEditor: React.FC<TextEditorProps> = ({
   setOpenDialog,
   onTextEditorChange,
 }) => {
-  const { experiences } = useExperienceFormStore();
+  // console.log(index);
+  const { experiences, updateExperience } = useExperienceFormStore();
+  const updateResumeExp = useResumeState((state) => state.updateExperience);
+
   const [value, setValue] = useState(`<ul>
       
     </ul>`);
@@ -58,7 +61,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
   useEffect(() => {
     setValue(saveValue);
   }, [saveValue]);
-  const onSubmit = async () => {
+  const onSubmit = async (index: number) => {
     try {
       setLoading(true);
       if (experiences[index].position == "") {
@@ -76,9 +79,12 @@ const TextEditor: React.FC<TextEditorProps> = ({
         experiences[index].position
       ).replace("{skills}", skills);
 
-      await aiChatSession.sendMessage(prompt).then((response) => {
-        console.log(response.response.text());
-        setValue(response.response.text());
+      await aiChatSession.sendMessage(prompt).then((result) => {
+        const newEntries = experiences.slice();
+        // setValue(response.response.text);
+        newEntries[index]["responsibilities"] = result.response.text();
+        updateExperience(newEntries[index].id, newEntries[index]);
+        updateResumeExp(newEntries[index].id, newEntries[index]);
       });
       toast.success("Response fetch Successfully");
       setLoading(false);
@@ -98,7 +104,11 @@ const TextEditor: React.FC<TextEditorProps> = ({
     <div>
       <Toaster />
       <EditorProvider>
-        <Editor value={value} onChange={(e) => onChange(e)}>
+        <Editor
+          className="border-zinc-500 bg-neutral-950 font-dmSans text-white text-md"
+          value={value}
+          onChange={(e) => onChange(e)}
+        >
           <Toolbar>
             <BtnUndo />
             <BtnRedo />
@@ -120,18 +130,18 @@ const TextEditor: React.FC<TextEditorProps> = ({
         </Editor>
       </EditorProvider>
       <Dialog open={openDialog}>
-        <DialogContent>
+        <DialogContent className="bg-neutral-900">
           <DialogHeader>
-            <DialogTitle className="text-xl font-openSans text-customDarkBlue font-bold">
+            <DialogTitle className="text-2xl font-dmSans text-white font-bold">
               Generate Summary Based On Your Skills
             </DialogTitle>
             <DialogDescription>
               <div className="my-4">
-                <p className="text-gray-400 font-openSans  text-sm">
+                <p className="text-red-600 font-dmSans  font-semibold text-md">
                   Mention your skills below
                 </p>
                 <Input
-                  className="mt-2 text-customDarkBlue font-openSans focus:border-2 focus-visible:ring-transparent border-customDarkBlue"
+                  className="mt-2 bg-neutral-950 text-white text-lg font-dmSans"
                   placeholder="Eg. React.js, Next.js, Spring Boot"
                   onChange={(e) => setSkills(e.target.value)}
                 />
@@ -141,14 +151,14 @@ const TextEditor: React.FC<TextEditorProps> = ({
           <DialogFooter>
             <Button
               onClick={() => setOpenDialog(false)}
-              className="bg-gray-700 outline-double hover:bg-gray-600"
+              className="bg-neutral-600  rounded-md flex items-center px-8  hover:bg-neutral-800"
             >
               Cancel
             </Button>
             <Button
-              onClick={() => onSubmit()}
+              onClick={() => onSubmit(index)}
               disabled={!skills}
-              className="bg-blue-900 hover:bg-customDarkBlue"
+              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Generate"}
             </Button>
