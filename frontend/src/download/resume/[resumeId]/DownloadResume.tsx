@@ -115,8 +115,8 @@ const DownloadResume = () => {
 
   return (
     <>
+      <Header />
       <div id="noPrint">
-        <Header />
         <div className="my-10 mx-10 md:mx-20 lg:mx-40">
           <h2 className="text-red-600 text-2xl font-dmSans font-bold text-center">{`${
             user!.name

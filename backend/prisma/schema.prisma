@@ -8,12 +8,14 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  password  String
-  createdAt DateTime @default(now())
-  resumes   Resume[]
+  id              Int      @id @default(autoincrement())
+  email           String   @unique
+  name            String?
+  password        String
+  aiUsageCount    Int      @default(0)
+  lastAiUsageDate DateTime @default(now())
+  createdAt       DateTime @default(now())
+  resumes         Resume[]
 }
 
 model Resume {

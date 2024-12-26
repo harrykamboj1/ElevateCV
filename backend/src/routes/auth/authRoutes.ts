@@ -1,5 +1,11 @@
 import express, { Request, Response } from "express";
-import { loginUser, register, checkSession, deleteUser } from "./controllers";
+import {
+  loginUser,
+  register,
+  checkSession,
+  deleteUser,
+  aiCountCheck,
+} from "./controllers";
 
 const router = express.Router();
 
@@ -9,5 +15,6 @@ router.post("/register", register as any);
 
 router.get("/session", checkSession as any);
 router.post("/delete", deleteUser as any);
+router.get("/aiCountCheck", aiCountCheck as any);
 
 export default router;

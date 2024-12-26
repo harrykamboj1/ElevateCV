@@ -31,6 +31,8 @@ import { useExperienceFormStore, useResumeState } from "@/store/store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import axios from "axios";
+import { apiUrl } from "@/lib/constants";
 
 type TextEditorProps = {
   saveValue: string;
@@ -74,24 +76,42 @@ const TextEditor: React.FC<TextEditorProps> = ({
         setLoading(false);
         return;
       }
+
       const prompt = PROMPT.replace(
         "{positionTitle}",
         experiences[index].position
       ).replace("{skills}", skills);
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("UnAuthorized");
+        return;
+      }
 
-      await aiChatSession.sendMessage(prompt).then((result) => {
-        const newEntries = experiences.slice();
-        // setValue(response.response.text);
-        newEntries[index]["responsibilities"] = result.response.text();
-        updateExperience(newEntries[index].id, newEntries[index]);
-        updateResumeExp(newEntries[index].id, newEntries[index]);
-      });
-      toast.success("Response fetch Successfully");
-      setLoading(false);
-      setOpenDialog(false);
+      await axios
+        .get(`${apiUrl}/auth/aiCountCheck`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(async (response) => {
+          if (response.data.errorCode === "1") {
+            await aiChatSession.sendMessage(prompt).then((result) => {
+              const newEntries = experiences.slice();
+              newEntries[index]["responsibilities"] = result.response.text();
+              updateExperience(newEntries[index].id, newEntries[index]);
+              updateResumeExp(newEntries[index].id, newEntries[index]);
+            });
+            toast.success("Response fetch Successfully");
+          } else {
+            toast.error(response.data.message);
+          }
+        });
     } catch (e) {
       console.log(e);
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+      setOpenDialog(false);
     }
   };
 

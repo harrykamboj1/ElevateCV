@@ -15,7 +15,10 @@ const Header = () => {
   return (
     <>
       <Toaster />
-      <div className="static w-full p-3 px-5 justify-between flex shadow-md bg-[#0d0d0d]">
+      <div
+        id="header"
+        className="sticky top-0 z-50 w-full p-3 px-5 justify-between flex shadow-md bg-[#0d0d0d]"
+      >
         <a href="/" className="flex items-center gap-x-4 hover:cursor-pointer">
           <img src="/tufLogo.png" width={35} height={35} alt="logo" />
           <h1 className="text-2xl font-semibold font-dmSans text-white  leading-none mb-4 mt-3">

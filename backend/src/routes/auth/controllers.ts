@@ -94,9 +94,13 @@ export const checkSession = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    res
-      .status(200)
-      .json({ userId: user.id, email: user.email, name: user.name });
+    res.status(200).json({
+      userId: user.id,
+      email: user.email,
+      name: user.name,
+      aiUsageCount: user.aiUsageCount,
+      lastAiUsageDate: user.lastAiUsageDate,
+    });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e });
@@ -126,5 +130,57 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: e });
+  }
+};
+
+export const aiCountCheck = async (req: Request, res: Response) => {
+  try {
+    const token = req.headers.authorization?.split(EMPTY_SPACE)[1];
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
+    if (!user) {
+      return res
+        .status(200)
+        .json({ message: "User not found", errorCode: "-1" });
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const lastUsageDate = user.lastAiUsageDate
+      ? new Date(user.lastAiUsageDate).toISOString().slice(0, 10)
+      : null;
+
+    if (!lastUsageDate || lastUsageDate !== today) {
+      user.aiUsageCount = 0;
+      user.lastAiUsageDate = new Date(today);
+    }
+
+    if (user.aiUsageCount >= 5) {
+      return res.status(200).json({
+        message: "You have reached your daily usage limit. Try again tomorrow.",
+        errorCode: "-1",
+      });
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        aiUsageCount: (user.aiUsageCount += 1),
+        lastAiUsageDate: new Date(),
+      },
+    });
+
+    return res.status(200).json({
+      message: "Submit Successfully",
+      errorCode: "1",
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(200).json({ message: "Something went wrong", errorCode: "-1" });
   }
 };
