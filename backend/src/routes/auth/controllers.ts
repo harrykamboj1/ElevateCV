@@ -102,3 +102,29 @@ export const checkSession = async (req: Request, res: Response) => {
     return res.status(500).json({ message: e });
   }
 };
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const token = req.headers.authorization?.split(EMPTY_SPACE)[1];
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+    console.log(decoded);
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    await prisma.user.delete({
+      where: { id: user.id },
+    });
+
+    res
+      .status(200)
+      .json({ message: "User deleted successfully", errorCode: "1" });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ message: e });
+  }
+};

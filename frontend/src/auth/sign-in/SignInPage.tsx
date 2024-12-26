@@ -16,8 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 const SignInPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -95,13 +98,28 @@ const SignInPage = () => {
                         Password
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          autoComplete="off"
-                          className="w-72 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
-                          placeholder="Enter your Password"
-                          {...field}
-                        />
+                        <div className="relative w-full">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            autoComplete="off"
+                            className="w-72 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                            placeholder="Enter your Password"
+                            {...field}
+                          />
+
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            className="absolute inset-y-0 right-0 flex items-center px-3 bg-neutral-90 hover:bg-transparent"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                          >
+                            {showPassword ? (
+                              <EyeOff size={20} className="text-gray-500" />
+                            ) : (
+                              <Eye size={20} className="text-gray-500" />
+                            )}
+                          </Button>
+                        </div>
                       </FormControl>
 
                       <FormMessage />
@@ -130,7 +148,6 @@ const SignInPage = () => {
           </div>
         </div>
 
-        {/* Hero Section */}
         <div className="h-full bg-black flex flex-col items-center justify-center animate-fade-in">
           <div className="flex items-center justify-center space-x-3 mb-4 animate-fade-in-up">
             {/* <svg

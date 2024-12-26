@@ -17,8 +17,11 @@ import { z } from "zod";
 import { apiUrl, FailFlag } from "@/lib/constants";
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 const SignUpPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -119,15 +122,29 @@ const SignUpPage = () => {
                         Password
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          autoComplete="off"
-                          className="w-72 font-dmSans border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
-                          placeholder="Enter your Password"
-                          {...field}
-                        />
-                      </FormControl>
+                        <div className="relative w-full">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            autoComplete="off"
+                            className="w-72 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                            placeholder="Enter your Password"
+                            {...field}
+                          />
 
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            className="absolute inset-y-0 right-0 flex items-center px-3 bg-neutral-90 hover:bg-transparent"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                          >
+                            {showPassword ? (
+                              <EyeOff size={20} className="text-gray-500" />
+                            ) : (
+                              <Eye size={20} className="text-gray-500" />
+                            )}
+                          </Button>
+                        </div>
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}

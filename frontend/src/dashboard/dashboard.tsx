@@ -66,6 +66,7 @@ const Dashboard = () => {
           }
           setLoading(false);
           setIsDeleteOpen(false);
+          setDeleteResumeId("");
         });
     } catch (e) {
       console.log("Error while deleting the resume :: " + e);
@@ -95,7 +96,7 @@ const Dashboard = () => {
       }
     };
     getAllResumeByUser();
-  }, [user, handleDeleteSubmit]);
+  }, [user, deleteResumeId]);
 
   if (isLoading && !user) {
     return (
