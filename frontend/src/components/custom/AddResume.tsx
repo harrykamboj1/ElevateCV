@@ -62,8 +62,9 @@ const AddResume: React.FC<AddResumeProps> = ({ email }) => {
         navigate(`/dashboard/resume/edit/${response.data.resume.resumeId}`);
       }
     } catch (e) {
+      toast.error("Something went wrong");
+    } finally {
       setLoading(false);
-      console.log(e);
     }
   };
   return (

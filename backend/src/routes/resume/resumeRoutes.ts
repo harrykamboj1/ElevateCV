@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import {
   createResume,
   getAllResumeByUserId,
@@ -6,8 +6,10 @@ import {
   saveAllResumeData,
   deleteResumeById,
 } from "./controllers";
+import { authMiddleware } from "../../utils/authMiddleware";
 const router = express.Router();
 
+router.use(authMiddleware);
 router.post("/create", createResume as any);
 router.post("/getResumeById", getResumeById as any);
 router.post("/getAllResumeByUserId", getAllResumeByUserId as any);

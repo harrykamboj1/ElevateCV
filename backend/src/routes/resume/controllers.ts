@@ -10,10 +10,6 @@ import { v4 as uuid } from "uuid";
 
 export const createResume = async (req: Request, res: Response) => {
   try {
-    const token = req.headers.authorization?.split(EMPTY_SPACE)[1];
-    if (!token) return res.status(401).json({ error: "Unauthorized" });
-    // const parseData = createResumeSchema.parse(req.body);
-    // const { email, title } = parseData;
     const { email, title, sectionOrder } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user)
