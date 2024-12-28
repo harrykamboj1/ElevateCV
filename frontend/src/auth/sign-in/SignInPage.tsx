@@ -173,10 +173,15 @@ const SignInPage = () => {
                 fill="#007DFC"
               ></path>
             </svg> */}
-            <img src="/tufLogo.png" width={55} height={45} alt="logo" />
-            <p className="text-white text-4xl font-dmSans font-semibold animate-fade-in">
-              Resume Builder
-            </p>
+            <a
+              href="/"
+              className="hover:cursor-pointer flex gap-x-3 items-center"
+            >
+              <img src="/tufLogo.png" width={55} height={45} alt="logo" />
+              <p className="text-white text-4xl font-dmSans font-semibold animate-fade-in">
+                Resume Builder
+              </p>
+            </a>
           </div>
           <p className="text-[#dee0e2] font-semibold text-xl text-center font-dmSans animate-fade-in-up">
             Get Hired Faster with AI-Enhanced Resumes Built to Impress!

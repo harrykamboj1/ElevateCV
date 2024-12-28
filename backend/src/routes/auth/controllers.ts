@@ -159,8 +159,13 @@ export const aiCountCheck = async (req: Request, res: Response) => {
       user.aiUsageCount = 0;
       user.lastAiUsageDate = new Date(today);
     }
-
-    if (user.aiUsageCount >= 5) {
+    console.log(user.aiUsageCount);
+    if (
+      user.aiUsageCount >=
+      (process.env.AI_COUNT_LIMIT !== ""
+        ? Number(process.env.AI_COUNT_LIMIT!)
+        : 5)
+    ) {
       return res.status(200).json({
         message: "You have reached your daily usage limit. Try again tomorrow.",
         errorCode: "-1",
