@@ -36,7 +36,7 @@ const ResumePreviewSection: React.FC<ResumePreviewProps> = ({
     <>
       <div className="flex justify-center underline">
         <h1
-          className="text-3xl text-red-600 hover:cursor-pointer font-dmSans  font-semibold"
+          className="text-3xl text-blue-600 hover:cursor-pointer font-dmSans  font-semibold"
           id="title"
         >
           {title}

@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { Wrapper } from "@/components/custom/Wrapper";
 
 type ResumeListType = {
   email: string;
@@ -38,7 +39,9 @@ const Dashboard = () => {
   const setIsDeleteOpenFxn = () => {
     setIsDeleteOpen(true);
   };
-  const closeDelete = () => setIsDeleteOpen(false);
+  const closeDelete = () => {
+    setIsDeleteOpen(false)
+  };
   const handleDeleteResumeId = (resumeId: string, resumeName: string) => {
     setDeleteResumeId(resumeId);
     setDeleteResumeName(resumeName);
@@ -100,9 +103,9 @@ const Dashboard = () => {
 
   if (isLoading && !user) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-customDarkGrey">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-backgroundColor">
         <ScaleLoader
-          color={"#dc2626"}
+          color={"#2563eb"}
           height={60}
           width={10}
           radius={6}
@@ -119,28 +122,29 @@ const Dashboard = () => {
   return (
     <>
       <Toaster />
-      <div className="p-10 md:px-20 lg:px-32 bg-[#191919] overflow-auto">
-        <h1 className="text-white font-bold font-dmSans text-3xl">{`${
-          user!.name
-        } Resumes`}</h1>
-        <p className="font-openSans text-gray-200 text-sm">
-          Build your brand-new resume in as little as 3 minutes.
-        </p>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mt-10">
-          <AddResume email={user!.email} />
-          {resumeList!.map((resume, index) => (
-            <>
-              <ResumeCard
-                resume={resume}
-                key={index}
-                cardKey={index}
-                setIsDeleteOpenFxn={setIsDeleteOpenFxn}
-                handleDeleteResumeId={handleDeleteResumeId}
-              />
-            </>
-          ))}
+      <Wrapper>
+        <div className="p-10 bg-backgroundColor overflow-auto">
+          <h1 className="text-blue-600 font-bold font-dmSans text-3xl">{`${user!.name
+            } Resumes`}</h1>
+          <p className="font-openSans text-gray-200 text-sm">
+            Build your brand-new resume in as little as 3 minutes.
+          </p>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 xl:grid-cols-4   2xl:grid-cols-4 mt-10">
+            <AddResume email={user!.email} />
+            {resumeList!.map((resume, index) => (
+              <>
+                <ResumeCard
+                  resume={resume}
+                  key={index}
+                  cardKey={index}
+                  setIsDeleteOpenFxn={setIsDeleteOpenFxn}
+                  handleDeleteResumeId={handleDeleteResumeId}
+                />
+              </>
+            ))}
+          </div>
         </div>
-      </div>
+      </Wrapper>
 
       <Dialog open={isDeleteOpen}>
         <DialogContent className="bg-neutral-900 ">

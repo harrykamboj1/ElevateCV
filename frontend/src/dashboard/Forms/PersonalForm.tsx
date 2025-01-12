@@ -33,19 +33,19 @@ const PersonalForm = () => {
   };
 
   return (
-    <div className="px-5 py-10 h-full    border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkGrey ">
+    <div className="px-5 py-10 h-full    border border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue">
       <div className="flex flex-col">
-        <h1 className="text-2xl text-red-600 font-dmSans  font-semibold">
+        <h1 className="text-2xl text-blue-500 font-dmSans  font-semibold">
           Personal Details
         </h1>
-        <p className="text-white font-dmSans font-normal text-sm">
+        <p className="text-zinc-300  font-dmSans font-normal text-sm">
           Get Started with your basic details
         </p>
-        <div className="border my-3 border-zinc-500"></div>
+        <div className="border my-3 border-zinc-400"></div>
       </div>
       <div className="grid grid-cols-2 gap-x-2 mt-3">
         <div>
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             First Name
           </Label>
           <Input
@@ -54,11 +54,11 @@ const PersonalForm = () => {
             value={firstName}
             autoComplete="off"
             onChange={(e) => handleInputChange("firstName", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent "
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent "
           />
         </div>
         <div>
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             Last Name
           </Label>
           <Input
@@ -67,12 +67,12 @@ const PersonalForm = () => {
             autoComplete="off"
             value={lastName}
             onChange={(e) => handleInputChange("lastName", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
           />
         </div>
 
         <div className="col-span-1 mt-4">
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             Phone Number
           </Label>
           <Input
@@ -81,11 +81,11 @@ const PersonalForm = () => {
             value={phone}
             autoComplete="off"
             onChange={(e) => handleInputChange("phone", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent "
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent "
           />
         </div>
         <div className="col-span-1 mt-4">
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             E-Mail
           </Label>
           <Input
@@ -94,11 +94,11 @@ const PersonalForm = () => {
             value={email}
             autoComplete="off"
             onChange={(e) => handleInputChange("email", e.target.value)}
-            className="mt-1 border-zinc-500  bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+            className="mt-1 border-zinc-400  bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             LinkedIn
           </Label>
           <Input
@@ -107,11 +107,11 @@ const PersonalForm = () => {
             value={linkedin}
             autoComplete="off"
             onChange={(e) => handleInputChange("linkedin", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg   focus-visible:ring-transparent "
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg   focus-visible:ring-transparent "
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             Github
           </Label>
           <Input
@@ -120,11 +120,11 @@ const PersonalForm = () => {
             value={github}
             autoComplete="off"
             onChange={(e) => handleInputChange("github", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-red-600 font-dmSans font-semibold">
+          <Label className="text-sm text-white font-dmSans font-semibold">
             Portfolio Link
           </Label>
           <Input
@@ -133,7 +133,7 @@ const PersonalForm = () => {
             value={portfolio}
             autoComplete="off"
             onChange={(e) => handleInputChange("portfolio", e.target.value)}
-            className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+            className="mt-1 border-zinc-400 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
           />
         </div>
       </div>

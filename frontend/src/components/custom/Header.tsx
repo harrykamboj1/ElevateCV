@@ -1,46 +1,27 @@
-// import { Button } from "../ui/button";
-// import { Link, useNavigate } from "react-router-dom";
-// import useAuth from "@/hooks/useAuth";
+
 import { Toaster } from "react-hot-toast";
 import AccountDropDown from "./AccountDropDown";
+import { Wrapper } from "./Wrapper";
 
 const Header = () => {
-  // const { isSignedIn } = useAuth();
-  // const navigate = useNavigate();
-  // const LogOut = () => {
-  //   localStorage.removeItem("token");
-  //   toast.success("Logout Successfully");
-  //   navigate("/auth/sign-in");
-  // };
+
   return (
     <>
       <Toaster />
-      <div
-        id="header"
-        className="sticky top-0 z-50 w-full p-3 px-5 justify-between flex shadow-md bg-[#0d0d0d]"
-      >
-        <a href="/" className="flex items-center gap-x-4 hover:cursor-pointer">
-          <img src="/tufLogo.png" width={35} height={35} alt="logo" />
-          <h1 className="text-2xl font-semibold font-dmSans text-white  leading-none mb-4 mt-3">
-            Resume Builder
-          </h1>
-        </a>
-        {/* {!isSignedIn ? (
-          <Link to={"/auth/sign-in"}>
-            <Button className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700">
-              Get Started
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
-            onClick={() => LogOut()}
-          >
-            Logout
-          </Button>
-        )} */}
-        <AccountDropDown />
-      </div>
+      <Wrapper>
+        <div
+          id="header"
+          className="static top-0 z-50 mt-2  w-full px- justify-between flex shadow-md bg-backgroundColor"
+        >
+          <a href="/" className="flex items-center gap-x-4 hover:cursor-pointer">
+            <h1 className="text-2xl font-semibold font-dmSans text-white  leading-none mb-4 mt-3">
+              100x Resume Buddy
+            </h1>
+          </a>
+
+          <AccountDropDown />
+        </div>
+      </Wrapper>
     </>
   );
 };

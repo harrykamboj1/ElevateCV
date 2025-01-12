@@ -10,10 +10,11 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			colors: {
-				customDarkBlue: '#072354',
+				customDarkBlue: '#11141c',
+				backgroundColor: "#040711",
 				customDarkGrey: '#191919',
-				background: 'hsl(var(--background))',
-				foreground: 'hsl(var(--foreground))',
+				background: 'hsl(var(--newBackground))',
+				foreground: 'hsl(var(--newBackground))',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'

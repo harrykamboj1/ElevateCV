@@ -31,7 +31,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
     <>
       <div
         key={cardKey}
-        className="flex-col border rounded-md relative flex aspect-[1/1.4142] hover:scale-105 shadow-lg border-red-600 cursor-pointer items-center justify-center bg-[#27272a] p-0 transition-transform space-y-0"
+        className="flex-col border rounded-md relative flex aspect-[1/1.4142] hover:scale-105 shadow-lg border-blue-600 cursor-pointer items-center justify-center bg-[#171725] p-0 transition-transform space-y-0"
       >
         <div className="absolute top-4 right-4 z-10 text-white opacity-80">
           <Trash2
@@ -40,7 +40,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
               openDelete();
             }}
             size={24}
-            className="hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+            className="hover:opacity-100 transition-opacity  text-red-400 hover:text-red-600 duration-300 cursor-pointer"
           />
         </div>
 
@@ -49,7 +49,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
           className="absolute inset-0"
         >
           <div className="absolute bottom-6 left-6 z-10 text-white">
-            <h1 className="text-red-600 text-[18px] font-semibold font-dmSans mb-1">
+            <h1 className="text-blue-600 text-[22px] font-semibold font-dmSans mb-1">
               {resume.title}
             </h1>
 
@@ -61,7 +61,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({
                 : "N/A"}
             </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-40 transition-opacity duration-300 hover:opacity-60 rounded-lg"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-backgroundColor via-transparent to-backgroundColor opacity-40 transition-opacity duration-300 hover:opacity-100 rounded-lg"></div>
         </Link>
       </div>
     </>

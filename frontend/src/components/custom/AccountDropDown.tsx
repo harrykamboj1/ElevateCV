@@ -1,15 +1,16 @@
 import { useState } from "react";
 
+
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+
+
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
@@ -27,6 +28,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { apiUrl, SuccessFlag } from "@/lib/constants";
 import { Toaster } from "../ui/toaster";
+import { Button } from "../ui/button";
 
 const AccountDropDown = () => {
   const [open, setOpen] = useState(false);
@@ -70,52 +72,60 @@ const AccountDropDown = () => {
   };
 
   const handleOpenChange = () => {
-    console.log(open);
     setOpen(!open);
   };
 
-  if (isLoading || user == null) {
-    return <div></div>;
+  if (isLoading && !user) {
+    return (
+      <></>
+    );
   }
-
   return (
     <>
       <Toaster />
-      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent className="bg-neutral-900">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-2xl font-dmSans text-white font-bold">
+
+      <Dialog open={alertOpen}>
+        <DialogContent className="bg-customDarkBlue">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-dmSans text-white font-bold">
               Are you sure?
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-red-600 font-dmSans  font-semibold text-md">
+            </DialogTitle>
+            <DialogDescription className="my-4 text-red-600 font-dmSans  font-semibold text-md">
+
               This action cannot be undone. This will permanently remove your
               account and any data your have.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel className="bg-neutral-600  rounded-md flex items-center px-8  hover:bg-neutral-800">
+
+
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={(e) => {
+              e.preventDefault();
+              setAlertOpen(false)
+              setOpen(false)
+            }} className="bg-neutral-700 text-white  rounded-md flex items-center px-8  hover:bg-neutral-800 hover:text-white">
               Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction
-              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+            </Button>
+            <Button
               onClick={async () => {
                 await DeleteAccountAction();
                 setAlertOpen(false);
                 navigate("/");
               }}
+              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
             >
               Yes, delete my account
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <div className="flex gap-4">
         <DropdownMenu open={open} onOpenChange={handleOpenChange}>
           <DropdownMenuTrigger asChild>
             <div className="flex items-center bg-transparent cursor-pointer gap-2">
               <Avatar>
-                <AvatarFallback className="bg-customDarkGrey border-2 border-neutral-600 font-dmSans text-white">
+                <AvatarFallback className="bg-customDarkGrey border-2 border-neutral-700 font-dmSans text-white">
                   {user!.name.substring(0, 1)}
                 </AvatarFallback>
               </Avatar>
@@ -126,7 +136,7 @@ const AccountDropDown = () => {
               )}
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="mt-2 bg-customDarkGrey text-white hover:bg-black">
+          <DropdownMenuContent className="mt-2 bg-customDarkBlue text-white hover:bg-customDarkBlue cursor-pointer hover:cursor-pointer">
             <DropdownMenuItem onClick={() => LogOut()}>
               <BiLogOut className="mr-2 h-5 w-5" />
               Sign Out
