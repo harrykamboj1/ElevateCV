@@ -25,7 +25,7 @@ model Resume {
   userId          Int
   createdAt       DateTime         @default(now())
   modifiedAt      DateTime         @default(now())
-  user            User             @relation(fields: [userId], references: [id])
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   PersonalDetails PersonalDetails?
   Experience      Experience[]
   Education       Education[]
@@ -47,7 +47,7 @@ model PersonalDetails {
 
   createdAt  DateTime @default(now())
   modifiedAt DateTime @default(now())
-  resume     Resume   @relation(fields: [resumeId], references: [resumeId])
+  resume     Resume   @relation(fields: [resumeId], references: [resumeId], onDelete: Cascade)
 }
 
 model Experience {
@@ -62,7 +62,7 @@ model Experience {
   responsibilities String   @default("")
   createdAt        DateTime @default(now())
   modifiedAt       DateTime @default(now())
-  Resume           Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+  Resume           Resume?  @relation(fields: [resumeResumeId], references: [resumeId], onDelete: Cascade)
 }
 
 model Education {
@@ -74,7 +74,7 @@ model Education {
   location       String   @default("")
   createdAt      DateTime @default(now())
   modifiedAt     DateTime @default(now())
-  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId], onDelete: Cascade)
 }
 
 model Skills {
@@ -85,7 +85,7 @@ model Skills {
   developerTools String[] @default([])
   createdAt      DateTime @default(now())
   modifiedAt     DateTime @default(now())
-  Resume         Resume   @relation(fields: [resumeResumeId], references: [resumeId])
+  Resume         Resume   @relation(fields: [resumeResumeId], references: [resumeId], onDelete: Cascade)
 }
 
 model Projects {
@@ -98,12 +98,12 @@ model Projects {
   description    String   @default("")
   createdAt      DateTime @default(now())
   modifiedAt     DateTime @default(now())
-  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId])
+  Resume         Resume?  @relation(fields: [resumeResumeId], references: [resumeId], onDelete: Cascade)
 }
 
 model SectionOrder {
   id             String   @id @default(uuid())
   resumeResumeId String   @unique
   order          String[]
-  Resume         Resume   @relation(fields: [resumeResumeId], references: [resumeId])
+  Resume         Resume   @relation(fields: [resumeResumeId], references: [resumeId], onDelete: Cascade)
 }

@@ -96,19 +96,19 @@ const SkillsForm = () => {
 
   return (
     <>
-      <div className="px-5 py-10 h-full    border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkGrey  ">
-        <h1 className="text-2xl text-red-600 font-dmSans  font-semibold">
+      <div className="px-5 py-10 h-full    border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue  ">
+        <h1 className="text-2xl text-blue-600 font-dmSans  font-semibold">
           Skills
         </h1>
         <p className="text-white font-dmSans font-normal text-sm">
           Add your Professional Skills
         </p>
-        <div className="border my-3 border-zinc-500"></div>
+        <div className="border my-3 border-zinc-300"></div>
 
-        <div className="mt-5 border border-zinc-500 p-5 shadow-lg rounded-xl">
+        <div className="mt-5 border border-zinc-300 p-5 shadow-lg rounded-xl">
           <div className="grid grid-cols-1 gap-x-2 mt-3">
             <div>
-              <Label className="text-md text-red-600 font-dmSans font-semibold">
+              <Label className="text-md text-red-500 font-dmSans font-semibold">
                 Languages
               </Label>
             </div>
@@ -120,7 +120,7 @@ const SkillsForm = () => {
                 autoComplete="off"
                 onChange={(event) => setInputValue(event.target.value)}
                 onKeyDown={(event) => handleKeyDown(event, "languages")}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ const SkillsForm = () => {
             {languages.map((skill, index) => (
               <div
                 key={index}
-                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-red-600   shadow-lg px-2 py-1 rounded-xl mt-1"
+                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-blue-600   shadow-lg px-2 py-1 rounded-xl mt-1"
               >
                 {skill}
                 <button
@@ -144,7 +144,7 @@ const SkillsForm = () => {
           {/* Frameworks */}
           <div className="grid grid-cols-1 gap-x-2 mt-3">
             <div>
-              <Label className="text-md text-red-600 font-dmSans font-semibold">
+              <Label className="text-md text-red-500 font-dmSans font-semibold">
                 Frameworks
               </Label>
             </div>
@@ -156,7 +156,7 @@ const SkillsForm = () => {
                 value={frameworkInputValue}
                 onChange={(event) => setFrameworkInputValue(event.target.value)}
                 onKeyDown={(event) => handleKeyDown(event, "frameworks")}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ const SkillsForm = () => {
             {frameworks.map((skill, index) => (
               <div
                 key={index}
-                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-red-600   shadow-lg px-2 py-1 rounded-xl mt-1"
+                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-blue-600   shadow-lg px-2 py-1 rounded-xl mt-1"
               >
                 {skill}
                 <button
@@ -179,7 +179,7 @@ const SkillsForm = () => {
 
           <div className="grid grid-cols-1 gap-x-2 mt-3">
             <div>
-              <Label className="text-md text-red-600 font-dmSans font-semibold">
+              <Label className="text-md text-red-500 font-dmSans font-semibold">
                 Developer Tools
               </Label>
             </div>
@@ -191,7 +191,7 @@ const SkillsForm = () => {
                 value={developerToolsInputValue}
                 onChange={(event) => setDeveloperToolsValue(event.target.value)}
                 onKeyDown={(event) => handleKeyDown(event, "developerTools")}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
               />
             </div>
           </div>
@@ -199,7 +199,7 @@ const SkillsForm = () => {
             {developerTools.map((skill, index) => (
               <div
                 key={index}
-                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-red-600   shadow-lg px-2 py-1 rounded-xl mt-1"
+                className="flex cursor-pointer items-center  font-dmSans text-xs font-semibold text-white bg-blue-600   shadow-lg px-2 py-1 rounded-xl mt-1"
               >
                 {skill}
                 <button

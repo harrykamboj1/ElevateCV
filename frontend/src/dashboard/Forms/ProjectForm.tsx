@@ -76,18 +76,18 @@ const ProjectForm = () => {
   };
 
   return (
-    <div className="px-5 py-10 h-full    border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkGrey ">
+    <div className="px-5 py-10 h-full    border-2 border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue ">
       <h1 className="text-2xl text-red-600 font-dmSans font-semibold">
         Project Details
       </h1>
       <p className="text-white font-dmSans font-normal text-sm">
         Add your Personal Projects
       </p>
-      <div className="border my-3 border-zinc-500"></div>
+      <div className="border my-3 border-zinc-300"></div>
       {projects.map((val, index) => (
         <div
           key={val.id}
-          className="mt-5 border border-zinc-500 p-5 shadow-lg rounded-xl"
+          className="mt-5 border border-zinc-300 p-5 shadow-lg rounded-xl"
         >
           <div className="flex flex-col"></div>
           <div className="grid grid-cols-2 gap-x-2 mt-3">
@@ -101,7 +101,7 @@ const ProjectForm = () => {
                 value={val.title}
                 autoComplete="off"
                 onChange={(event) => handleChange(index, event)}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
               />
             </div>
             <div>
@@ -114,7 +114,7 @@ const ProjectForm = () => {
                 value={val.techStack}
                 autoComplete="off"
                 onChange={(event) => handleChange(index, event)}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
               />
             </div>
 
@@ -128,7 +128,7 @@ const ProjectForm = () => {
                 value={val.startDate}
                 autoComplete="off"
                 onChange={(event) => handleChange(index, event)}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
                 style={{
                   colorScheme: "dark",
                 }}
@@ -144,7 +144,7 @@ const ProjectForm = () => {
                 value={val.endDate}
                 autoComplete="off"
                 onChange={(event) => handleChange(index, event)}
-                className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                className="mt-1 border-zinc-300 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
                 style={{
                   colorScheme: "dark",
                 }}

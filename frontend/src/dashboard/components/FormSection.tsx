@@ -42,7 +42,7 @@ const FormSection: React.FC<FormType> = ({ resumeId }) => {
           <div className="py-4">
             {
               <Button
-                className="flex items-center gap-x-2 font-dmSans border bg-backgroundColor rounded-lg px-8 py-2.5 border-blue-600 hover:border-2 hover:bg-blue-700"
+                className="flex items-center gap-x-2 font-dmSans border  rounded-lg px-8 py-2.5 border-blue-600  hover:bg-blue-700"
                 onClick={() => navigate("/dashboard")}
               >
                 Back to Dashboard
@@ -60,7 +60,7 @@ const FormSection: React.FC<FormType> = ({ resumeId }) => {
             )}
             {active < 6 && (
               <Button
-                className="flex items-center font-dmSans  rounded-lg px-14 py-2.5 border-2 border-blue-700 hover:bg-backgroundColor bg-blue-700"
+                className="flex items-center font-dmSans  rounded-lg px-14 py-2.5 border-2 border-blue-700 hover:bg-blue-700 bg-blue-600"
                 onClick={() => changeFormType(active + 1)}
               >
                 Next <ArrowRight />
@@ -68,7 +68,7 @@ const FormSection: React.FC<FormType> = ({ resumeId }) => {
             )}
             {active == 6 && (
               <Button
-                className="flex items-center font-dmSans  rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600"
+                className="flex items-center font-dmSans  rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
                 onClick={() => navigateToDownload()}
               >
                 Download Resume

@@ -17,7 +17,7 @@ export default function ShareResume({
 
 const style = {
   root: {
-    background: "#191919",
+    background: "#11141c",
     borderRadius: 3,
     border: 2,
     display: "flex",
@@ -28,7 +28,7 @@ const style = {
   },
   copyContainer: {
     border: "2px solid grey",
-    background: "#191919",
+    background: "#11141c",
   },
   title: {
     color: "red",

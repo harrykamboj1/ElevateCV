@@ -9,9 +9,9 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-customDarkGrey">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-backgroundColor">
         <ScaleLoader
-          color={"#dc2626"}
+          color={"#2563eb"}
           height={60}
           width={10}
           radius={6}

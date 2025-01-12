@@ -93,23 +93,23 @@ const ExperienceForm = () => {
 
   return (
     <>
-      <div className="px-5 py-10 h-full   border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkGrey ">
-        <h1 className="text-2xl text-red-600 font-dmSans font-semibold">
+      <div className="px-5 py-10 h-full   border-2 border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue ">
+        <h1 className="text-2xl text-blue-600 font-dmSans font-semibold">
           Professional Experience
         </h1>
         <p className="text-white font-dmSans font-normal text-sm">
           Add your Job Experience
         </p>
-        <div className="border my-3 border-zinc-500"></div>
+        <div className="border my-3 border-zinc-300"></div>
         {experiences.map((val, index) => (
           <div
             key={val.id}
-            className="mt-5 border border-zinc-500 p-5 shadow-lg rounded-md"
+            className="mt-5 border border-zinc-300 p-5 shadow-lg rounded-md"
           >
             <div className="flex flex-col"></div>
             <div className="grid grid-cols-2 gap-x-2 mt-3">
               <div>
-                <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                <Label className="text-sm text-red-500 font-dmSans font-semibold">
                   Position Title
                 </Label>
                 <Input
@@ -118,11 +118,11 @@ const ExperienceForm = () => {
                   value={val.position}
                   autoComplete="off"
                   onChange={(event) => handleChange(index, event)}
-                  className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                  className="mt-1 border-zinc-300 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                 />
               </div>
               <div>
-                <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                <Label className="text-sm text-red-500 font-dmSans font-semibold">
                   Company Name
                 </Label>
                 <Input
@@ -131,12 +131,12 @@ const ExperienceForm = () => {
                   value={val.company}
                   autoComplete="off"
                   onChange={(event) => handleChange(index, event)}
-                  className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                  className="mt-1 border-zinc-300 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                 />
               </div>
 
               <div className="col-span-1 mt-4">
-                <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                <Label className="text-sm text-red-500 font-dmSans font-semibold">
                   Location
                 </Label>
                 <Input
@@ -145,11 +145,11 @@ const ExperienceForm = () => {
                   value={val.location}
                   autoComplete="off"
                   onChange={(event) => handleChange(index, event)}
-                  className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                  className="mt-1 border-zinc-300 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                 />
               </div>
               <div className="col-span-1 mt-4">
-                <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                <Label className="text-sm text-red-500 font-dmSans font-semibold">
                   Start Date
                 </Label>
                 <Input
@@ -158,14 +158,14 @@ const ExperienceForm = () => {
                   value={val.startDate}
                   autoComplete="off"
                   onChange={(event) => handleChange(index, event)}
-                  className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent "
+                  className="mt-1 border-zinc-300 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent "
                   style={{
                     colorScheme: "dark",
                   }}
                 />
               </div>
               <div className="col-span-1 mt-4">
-                <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                <Label className="text-sm text-red-500 font-dmSans font-semibold">
                   End Date
                 </Label>
                 <Input
@@ -175,7 +175,7 @@ const ExperienceForm = () => {
                   value={val.endDate}
                   autoComplete="off"
                   onChange={(event) => handleChange(index, event)}
-                  className="mt-1 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                  className="mt-1 border-zinc-300 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
                   style={{
                     colorScheme: "dark",
                   }}
@@ -192,7 +192,7 @@ const ExperienceForm = () => {
                       handleCheckChange(event, "isPresent", index)
                     }
                   />
-                  <Label className="text-sm text-red-600 font-dmSans font-semibold">
+                  <Label className="text-sm text-red-500 font-dmSans font-semibold">
                     Present
                   </Label>
                 </div>
@@ -200,7 +200,7 @@ const ExperienceForm = () => {
               <div className="col-span-1 mt-10">
                 <Button
                   onClick={() => generateSummaryFromAi(index)}
-                  className="flex items-center font-dmSans  rounded-lg px-6 py-2.5 border-2 border-red-600 bg-red-600 "
+                  className="flex items-center font-dmSans  rounded-lg px-6 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
                 >
                   <Brain /> Ask AI
                 </Button>
@@ -222,13 +222,13 @@ const ExperienceForm = () => {
         <div className="flex justify-start mt-4 gap-x-4">
           <Button
             onClick={handleAddExperience}
-            className="flex items-center bg-blue-800 hover:bg-blue-900 rounded-lg px-8 py-2.5  font-dmSans text-white "
+            className="flex items-center bg-blue-600 hover:bg-blue-700 rounded-lg px-8 py-2.5  font-dmSans text-white "
           >
             <Plus /> Add Experience
           </Button>
           <Button
             onClick={handleDelete}
-            className="flex items-center font-dmSans  rounded-lg px-8 py-2.5 border-2 border-red-600 bg-red-600"
+            className="flex items-center font-dmSans  rounded-lg px-8 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
           >
             Delete Experience
           </Button>

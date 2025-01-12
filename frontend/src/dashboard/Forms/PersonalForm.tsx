@@ -33,7 +33,7 @@ const PersonalForm = () => {
   };
 
   return (
-    <div className="px-5 py-10 h-full    border border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue">
+    <div className="px-5 py-10 h-full    border-2 border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue">
       <div className="flex flex-col">
         <h1 className="text-2xl text-blue-500 font-dmSans  font-semibold">
           Personal Details
@@ -45,7 +45,7 @@ const PersonalForm = () => {
       </div>
       <div className="grid grid-cols-2 gap-x-2 mt-3">
         <div>
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             First Name
           </Label>
           <Input
@@ -58,7 +58,7 @@ const PersonalForm = () => {
           />
         </div>
         <div>
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             Last Name
           </Label>
           <Input
@@ -72,7 +72,7 @@ const PersonalForm = () => {
         </div>
 
         <div className="col-span-1 mt-4">
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             Phone Number
           </Label>
           <Input
@@ -85,7 +85,7 @@ const PersonalForm = () => {
           />
         </div>
         <div className="col-span-1 mt-4">
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             E-Mail
           </Label>
           <Input
@@ -98,7 +98,7 @@ const PersonalForm = () => {
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             LinkedIn
           </Label>
           <Input
@@ -111,7 +111,7 @@ const PersonalForm = () => {
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             Github
           </Label>
           <Input
@@ -124,7 +124,7 @@ const PersonalForm = () => {
           />
         </div>
         <div className="col-span-2 mt-4">
-          <Label className="text-sm text-white font-dmSans font-semibold">
+          <Label className="text-sm text-red-500 font-dmSans font-semibold">
             Portfolio Link
           </Label>
           <Input

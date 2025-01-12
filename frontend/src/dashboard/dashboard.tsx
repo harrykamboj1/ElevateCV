@@ -147,7 +147,7 @@ const Dashboard = () => {
       </Wrapper>
 
       <Dialog open={isDeleteOpen}>
-        <DialogContent className="bg-neutral-900 ">
+        <DialogContent className="bg-customDarkBlue ">
           <DialogHeader>
             <DialogTitle className="text-2xl font-dmSans text-white font-bold">
               Delete Resume

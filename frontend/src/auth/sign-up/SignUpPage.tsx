@@ -53,18 +53,32 @@ const SignUpPage = () => {
       <div>
         <Toaster />
       </div>
-      <div className="min-h-screen bg-[#000000e8] grid grid-cols-1 lg:grid-cols-2 animate-fade-in">
+      <div className="min-h-screen bg-backgroundColor flex flex-col justify-center animate-fade-in">
+
+        {/* Hero Section */}
+        <div className="h-full bg-backgroundColor flex flex-col items-center justify-center animate-fade-in">
+          <div className="flex items-center justify-center space-x-3 mb-4 animate-fade-in-up">
+            <a
+              href="/"
+              className="hover:cursor-pointer flex gap-x-3 items-center"
+            >
+              {/* <img src="/tufLogo.png" width={55} height={45} alt="logo" /> */}
+              <p className="text-white text-5xl font-dmSans font-semibold animate-fade-in">
+                <span className='text-blue-600'>100x Resume Buddy</span>
+              </p>
+            </a>
+          </div>
+          {/* <p className="text-[#dee0e2] font-semibold text-xl text-center animate-fade-in-up">
+            Get Hired Faster with AI-Enhanced Resumes Built to Impress!
+          </p> */}
+        </div>
         <div className="h-full lg:flex flex-col items-center justify-center px-4 ">
-          {/* <div className="text-center space-y-4 pt-16">
-            <h1 className="font-openSans text-3xl text-[#2E2A47]">
-              Welcome to <span className="font-semibold">Resume Buddy</span>
-            </h1>
-          </div> */}
-          <p className="text-lg font-dmSans text-white ">
+
+          <p className="text-xl font-dmSans text-white ">
             Create an account to get back to your dashboard
           </p>
 
-          <div className="border-2 p-8 mt-8  border-zinc-500  rounded-xl  shadow-xl      bg-customDarkGrey ">
+          <div className="border-2 p-8 mt-8  border-zinc-300  rounded-xl  shadow-xl      bg-customDarkBlue ">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -75,12 +89,12 @@ const SignUpPage = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-red-600 font-dmSans font-semibold text-md">
+                      <FormLabel className="text-blue-600 font-dmSans font-semibold text-md">
                         Username
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="w-72 font-dmSans border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                          className="w-72 font-dmSans border-zinc-100 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
                           autoComplete="off"
                           placeholder="Enter your Name"
                           {...field}
@@ -96,14 +110,14 @@ const SignUpPage = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-red-600 font-dmSans font-semibold text-md">
+                      <FormLabel className="text-blue-600 font-dmSans font-semibold text-md">
                         Email
                       </FormLabel>
                       <FormControl>
                         <Input
                           type="email"
                           autoComplete="off"
-                          className="w-72 font-dmSans border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                          className="w-72 font-dmSans border-zinc-100 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
                           placeholder="Enter your Email Address"
                           {...field}
                         />
@@ -118,7 +132,7 @@ const SignUpPage = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-red-600 font-dmSans font-semibold text-md">
+                      <FormLabel className="text-bluee-600 font-dmSans font-semibold text-md">
                         Password
                       </FormLabel>
                       <FormControl>
@@ -126,7 +140,7 @@ const SignUpPage = () => {
                           <Input
                             type={showPassword ? "text" : "password"}
                             autoComplete="off"
-                            className="w-72 border-zinc-500 bg-neutral-950 text-white text-lg  focus-visible:ring-transparent"
+                            className="w-72 border-zinc-100 bg-backgroundColor text-white text-lg  focus-visible:ring-transparent"
                             placeholder="Enter your Password"
                             {...field}
                           />
@@ -138,9 +152,9 @@ const SignUpPage = () => {
                             onClick={() => setShowPassword((prev) => !prev)}
                           >
                             {showPassword ? (
-                              <EyeOff size={20} className="text-gray-500" />
+                              <EyeOff size={20} className="text-gray-100" />
                             ) : (
-                              <Eye size={20} className="text-gray-500" />
+                              <Eye size={20} className="text-gray-100" />
                             )}
                           </Button>
                         </div>
@@ -150,7 +164,7 @@ const SignUpPage = () => {
                   )}
                 />
                 <Button
-                  className="bg-red-600  hover:bg-red-700 font-dmSans w-28"
+                  className="bg-blue-600  hover:bg-blue-700 font-dmSans w-28"
                   type="submit"
                 >
                   Sign Up
@@ -160,7 +174,7 @@ const SignUpPage = () => {
                   <span>
                     <Link
                       to={"/auth/sign-in"}
-                      className="hover:text-red-600 hover:font-semibold"
+                      className="hover:text-blue-600 hover:font-semibold"
                     >
                       Sign In
                     </Link>
@@ -169,24 +183,6 @@ const SignUpPage = () => {
               </form>
             </Form>
           </div>
-        </div>
-
-        {/* Hero Section */}
-        <div className="h-full bg-black flex flex-col items-center justify-center animate-fade-in">
-          <div className="flex items-center justify-center space-x-3 mb-4 animate-fade-in-up">
-            <a
-              href="/"
-              className="hover:cursor-pointer flex gap-x-3 items-center"
-            >
-              <img src="/tufLogo.png" width={55} height={45} alt="logo" />
-              <p className="text-white text-4xl font-dmSans font-semibold animate-fade-in">
-                Resume Builder
-              </p>
-            </a>
-          </div>
-          <p className="text-[#dee0e2] font-semibold text-xl text-center animate-fade-in-up">
-            Get Hired Faster with AI-Enhanced Resumes Built to Impress!
-          </p>
         </div>
       </div>
     </>

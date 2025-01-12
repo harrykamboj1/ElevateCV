@@ -125,7 +125,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
       <Toaster />
       <EditorProvider>
         <Editor
-          className="border-zinc-500 bg-neutral-950 font-dmSans text-white text-md"
+          className="border-zinc-300 bg-customDarkBlue font-dmSans text-white text-md "
           value={value}
           onChange={(e) => onChange(e)}
         >
@@ -150,18 +150,18 @@ const TextEditor: React.FC<TextEditorProps> = ({
         </Editor>
       </EditorProvider>
       <Dialog open={openDialog}>
-        <DialogContent className="bg-neutral-900">
+        <DialogContent className="bg-customDarkBlue">
           <DialogHeader>
             <DialogTitle className="text-2xl font-dmSans text-white font-bold">
               Generate Summary Based On Your Skills
             </DialogTitle>
             <DialogDescription>
               <div className="my-4">
-                <p className="text-red-600 font-dmSans  font-semibold text-md">
+                <p className="text-blue-600 font-dmSans  font-semibold text-md">
                   Mention your skills below
                 </p>
                 <Input
-                  className="mt-2 bg-neutral-950 text-white text-lg font-dmSans"
+                  className="mt-2 bg-backgroundColor text-white text-lg font-dmSans"
                   placeholder="Eg. React.js, Next.js, Spring Boot"
                   onChange={(e) => setSkills(e.target.value)}
                 />
@@ -178,7 +178,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
             <Button
               onClick={() => onSubmit(index)}
               disabled={!skills}
-              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              className="flex items-center  rounded-md px-8 text-md font-dmSans py-2.5 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Generate"}
             </Button>

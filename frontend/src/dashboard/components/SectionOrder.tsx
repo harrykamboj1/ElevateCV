@@ -78,7 +78,7 @@ const SectionOrder = ({ resumeId }: { resumeId: string | undefined }) => {
   return (
     <div>
       <Toaster />
-      <div className="px-5 py-10 h-full   border-2 border-zinc-500  rounded-xl p-6 shadow-xl      bg-customDarkGrey  ">
+      <div className="px-5 py-10 h-full   border-2 border-blue-500  rounded-xl p-6 shadow-xl      bg-customDarkBlue  ">
         <h1 className="text-2xl text-red-600 font-dmSans font-semibold">
           Section Order
         </h1>
@@ -101,11 +101,10 @@ const SectionOrder = ({ resumeId }: { resumeId: string | undefined }) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className={`p-4 rounded-lg font-dmSans border-zinc-500 bg-neutral-700 text-white text-lg  focus-visible:ring-transparent ${
-                          snapshot.isDragging
-                            ? "bg-neutral-800"
-                            : "bg-neutral-700 hover:bg-neutral-950"
-                        }`}
+                        className={`p-4 rounded-lg font-dmSans border-zinc-5  00 bg-neutral-800 border-gray-700 border text-white text-lg  focus-visible:ring-transparent ${snapshot.isDragging
+                          ? "bg-neutral-800"
+                          : "bg-neutral-700 hover:bg-customDarkBlue hover:border-gray-300 "
+                          }`}
                       >
                         {index + 1} {section}
                       </div>

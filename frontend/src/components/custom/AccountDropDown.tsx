@@ -77,7 +77,8 @@ const AccountDropDown = () => {
 
   if (isLoading && !user) {
     return (
-      <></>
+      <>
+      </>
     );
   }
   return (
@@ -103,6 +104,7 @@ const AccountDropDown = () => {
               e.preventDefault();
               setAlertOpen(false)
               setOpen(false)
+              document.body.style.pointerEvents = "auto";
             }} className="bg-neutral-700 text-white  rounded-md flex items-center px-8  hover:bg-neutral-800 hover:text-white">
               Cancel
             </Button>

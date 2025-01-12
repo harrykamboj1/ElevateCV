@@ -93,9 +93,9 @@ const DownloadResume = () => {
 
   if (!resumeInfo || isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-customDarkGrey">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r bg-backgroundColor">
         <ScaleLoader
-          color={"#dc2626"}
+          color={"#2563eb"}
           height={60}
           width={10}
           radius={6}
@@ -118,21 +118,20 @@ const DownloadResume = () => {
       <Header />
       <div id="noPrint">
         <div className="my-10 mx-10 md:mx-20 lg:mx-40">
-          <h2 className="text-red-600 text-2xl font-dmSans font-bold text-center">{`${
-            user!.name
-          } Your ${title} Resume is ready!`}</h2>
+          <h2 className="text-red-600 text-2xl font-dmSans font-bold text-center">{`${user!.name
+            } Your ${title} Resume is ready!`}</h2>
           <p className="text-white text-center font-dmSans">
             Download and Share and get Ready for Job Hunt
           </p>
           <div className="flex justify-between">
             <Button
-              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700"
               onClick={() => handleDownload()}
             >
               Download
             </Button>
             <Button
-              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700"
               onClick={() => openShare()}
             >
               Share
@@ -144,15 +143,15 @@ const DownloadResume = () => {
         <ResumePreviewSection resumeInfo={resumeInfo} title={title} />
       </div>
       {isShareOpen && (
-        <div className="fixed inset-0 bg-customDarkGrey   bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-customDarkGrey p-6 rounded-lg border-2 border-neutral-600  shadow-lg text-center">
+        <div className="fixed inset-0 bg-customDarkBlue   bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-customDarkBlue p-6 rounded-lg border-2 border-neutral-600  shadow-lg text-center">
             <h2 className="text-2xl font-dmSans text-red-600 font-bold ">
               Share the Resume
             </h2>
             <ShareResume resumeId={params!.resumeId} />
             <Button
               onClick={closeShare}
-              className="font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-red-600 bg-red-600 hover:bg-red-700"
+              className="font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700"
             >
               Close
             </Button>
