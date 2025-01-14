@@ -71,18 +71,18 @@ export const dummyData = {
       endDate: "Feb 2024",
     },
   ],
-  certifications: [
-    {
-      title: "AWS Certified Solutions Architect",
-      issuedBy: "Amazon Web Services",
-      issueDate: "March 2022",
-    },
-    {
-      title: "Certified Kubernetes Administrator",
-      issuedBy: "Cloud Native Computing Foundation",
-      issueDate: "July 2021",
-    },
-  ],
+  // certifications: [
+  //   {
+  //     title: "AWS Certified Solutions Architect",
+  //     issuedBy: "Amazon Web Services",
+  //     issueDate: "March 2022",
+  //   },
+  //   {
+  //     title: "Certified Kubernetes Administrator",
+  //     issuedBy: "Cloud Native Computing Foundation",
+  //     issueDate: "July 2021",
+  //   },
+  // ],
   languages: [
     {
       language: "English",
@@ -93,18 +93,18 @@ export const dummyData = {
       proficiency: "Professional Working Proficiency",
     },
   ],
-  volunteering: [
-    {
-      organization: "Code for Good",
-      role: "Volunteer Web Developer",
-      duration: "2020 - 2021",
-      responsibilities: [
-        "Developed web applications for non-profit organizations, improving accessibility and user engagement.",
-        "Trained junior developers in JavaScript and React, contributing to the organization's capacity-building efforts.",
-      ],
-    },
-  ],
-  references: "Available upon request",
+  // volunteering: [
+  //   {
+  //     organization: "Code for Good",
+  //     role: "Volunteer Web Developer",
+  //     duration: "2020 - 2021",
+  //     responsibilities: [
+  //       "Developed web applications for non-profit organizations, improving accessibility and user engagement.",
+  //       "Trained junior developers in JavaScript and React, contributing to the organization's capacity-building efforts.",
+  //     ],
+  //   },
+  // ],
+  // references: "Available upon request",
 };
 
 export interface ResumeData {
@@ -143,20 +143,20 @@ export interface ResumeData {
     startDate: string;
     endDate: string;
   }[];
-  certifications: {
-    title: string;
-    issuedBy: string;
-    issueDate: string;
-  }[];
-  languages: {
-    language: string;
-    proficiency: string;
-  }[];
+  // certifications: {
+  //   title: string;
+  //   issuedBy: string;
+  //   issueDate: string;
+  // }[];
+  // languages: {
+  //   language: string;
+  //   proficiency: string;
+  // }[];
   // volunteering: {
   //   organization: string;
   //   role: string;
   //   duration: string;
   //   responsibilities: string[];
   // }[];
-  references: string;
+  // references: string;
 }

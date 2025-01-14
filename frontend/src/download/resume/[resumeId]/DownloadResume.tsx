@@ -1,7 +1,7 @@
 import Header from "@/components/custom/Header";
 import { Button } from "@/components/ui/button";
 import ResumePreviewSection from "@/dashboard/components/ResumePreviewSection";
-import { ResumeData } from "@/dashboard/data/ResumeDummyData";
+import { dummyData, ResumeData } from "@/dashboard/data/ResumeDummyData";
 import useAuth from "@/hooks/useAuth";
 import { apiUrl } from "@/lib/constants";
 
@@ -19,12 +19,13 @@ import toast from "react-hot-toast";
 import { Navigate, useParams } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
 import ShareResume from "@/dashboard/components/Share";
+import Confettii from "@/components/confetti";
 
 const DownloadResume = () => {
   const params = useParams();
   const { user, isLoading, isSignedIn } = useAuth();
   const [isShareOpen, setIsShareOpen] = useState(false);
-
+  const [showConfetti, setShowConfetti] = useState(false); // Confetti state
   const openShare = () => setIsShareOpen(true);
   const closeShare = () => setIsShareOpen(false);
   const [resumeInfo, setResumeInfo] = useState<ResumeData | null>(null);
@@ -35,6 +36,12 @@ const DownloadResume = () => {
   const setSectionOrder = useSectionStore((state) => state.setSectionOrder);
   const setEducation = useEducationState((state) => state.setEducation);
   const setSkills = useSkillsFormState((state) => state.setSkills);
+
+
+  const triggerConfetti = () => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 3000);
+  };
 
   useEffect(() => {
     const fetchResumeDataById = async (resumeId: string) => {
@@ -75,6 +82,7 @@ const DownloadResume = () => {
           setSkills(response.data!.resume.Skills);
 
           setSectionOrder(response.data!.resume.SectionOrder.order);
+          triggerConfetti();
         } else {
           toast.error("No Resume Details Found");
           setResumeInfo(dummyData);
@@ -113,8 +121,13 @@ const DownloadResume = () => {
     window.print();
   };
 
+
+
   return (
     <>
+      {showConfetti && (
+        <Confettii width={window.innerWidth} height={window.innerHeight} />
+      )}
       <Header />
       <div id="noPrint">
         <div className="my-10 mx-10 md:mx-20 lg:mx-40">
