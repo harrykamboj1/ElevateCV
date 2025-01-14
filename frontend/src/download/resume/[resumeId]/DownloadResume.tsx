@@ -16,13 +16,15 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
 import ShareResume from "@/dashboard/components/Share";
 import Confettii from "@/components/confetti";
+import { ArrowLeft } from "lucide-react";
 
 const DownloadResume = () => {
   const params = useParams();
+  const navigate = useNavigate();
   const { user, isLoading, isSignedIn } = useAuth();
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false); // Confetti state
@@ -130,12 +132,20 @@ const DownloadResume = () => {
       )}
       <Header />
       <div id="noPrint">
-        <div className="my-10 mx-10 md:mx-20 lg:mx-40">
+        <div className="my-10 mx-10 p-2 md:mx-20 lg:mx-40">
           <h2 className="text-red-600 text-2xl font-dmSans font-bold text-center">{`${user!.name
             } Your ${title} Resume is ready!`}</h2>
           <p className="text-white text-center font-dmSans">
             Download and Share and get Ready for Job Hunt
           </p>
+          <div className="pb-5">
+            <Button
+              className="flex items-center  w-36  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-gray-600 bg-gray-600 hover:bg-gray-700"
+              onClick={() => navigate(`/dashboard/resume/edit/${params.resumeId}`)}
+            >
+              <ArrowLeft /> Edit Resume
+            </Button>
+          </div>
           <div className="flex justify-between">
             <Button
               className="flex items-center  font-dmSans font-semibold rounded-lg px-10 py-2.5 border-2 border-blue-600 bg-blue-600 hover:bg-blue-700"
